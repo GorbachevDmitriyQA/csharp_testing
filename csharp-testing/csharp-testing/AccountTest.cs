@@ -11,18 +11,18 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
+using AccountTest;
 
 namespace Addressbook
 {
 
     [TestFixture]
-    public class TestTest
+    public class ContactTest
     {
         private IWebDriver driver;
         public IDictionary<string, object> vars { get; private set; }
         private IJavaScriptExecutor js;
         public string baseURL;
-
         [SetUp]
         public void SetUp()
         {
@@ -31,8 +31,6 @@ namespace Addressbook
             // options.UseLegacyImplementation = true;
             driver = new FirefoxDriver(options);
             baseURL = "http://localhost:8080/addressbook/";
-
-
         }
         [TearDown]
         protected void TearDown()
@@ -40,40 +38,41 @@ namespace Addressbook
             driver.Quit();
         }
         [Test]
-        public void GroupTest()
+        public void contact()
         {
-            OpenToHomePage();
-            CustomizeWindow();
+            OpenHomePage();
+            SetWindowSize();
             Login(new AccountData("admin", "secret"));
-            GroupData groupData = new GroupData("qwe");
-            groupData.Footer = "xcv";
-            groupData.Header = "xcv";
-            CreateGroup(groupData);
-            OpenGroupPage();
-            LogOut();
+            PersonInfo personInfo = new PersonInfo("Diman");
+            personInfo.LastName = "Nefor";
+            personInfo.Address = "Limbo";
+            personInfo.Email = "nownownow@mail.ru";
+            CreateNewAccount(personInfo);
+            Logout();
+
         }
 
-        private void LogOut()
+        private void Logout()
         {
             driver.FindElement(By.LinkText("Logout")).Click();
         }
 
-        private void OpenGroupPage()
+        private void CreateNewAccount(PersonInfo personInfo)
         {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
-        private void CreateGroup(GroupData groupData)
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("new")).Click();
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).SendKeys(groupData.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).SendKeys(groupData.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).SendKeys(groupData.Footer);
+            driver.FindElement(By.LinkText("add new")).Click();
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).SendKeys(personInfo.FirstName);
+            driver.FindElement(By.Name("lastname")).Click();
+            driver.FindElement(By.Name("lastname")).SendKeys(personInfo.LastName);
+            driver.FindElement(By.Name("address")).Click();
+            driver.FindElement(By.Name("address")).SendKeys(personInfo.Address);
+            driver.FindElement(By.Name("email")).Click();
+            driver.FindElement(By.Name("email")).SendKeys(personInfo.Email);
             driver.FindElement(By.Name("submit")).Click();
+            //IDE Ругается на устаревший метод, но он работает. Что в данном случае лучше применить?
+            driver.Manage().Timeouts().ImplicitlyWait(TimeSpan.FromSeconds(10));
+            //Если не использовать таймаут = не удается найти елемент для логаута и тест падает. 
+            //driver.FindElement(By.LinkText("home")).Click();
         }
 
         private void Login(AccountData account)
@@ -84,12 +83,12 @@ namespace Addressbook
             driver.FindElement(By.CssSelector("input:nth-child(7)")).Click();
         }
 
-        private void CustomizeWindow()
+        private void SetWindowSize()
         {
             driver.Manage().Window.Size = new System.Drawing.Size(2575, 1415);
         }
 
-        private void OpenToHomePage()
+        private void OpenHomePage()
         {
             driver.Navigate().GoToUrl(baseURL);
         }
