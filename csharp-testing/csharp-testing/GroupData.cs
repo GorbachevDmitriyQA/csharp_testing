@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Addressbook
 {
-    internal class GroupData
+    public class GroupData
     {
-        public string Name { get; set; } = "";
-        public string Header { get; set; } = "";
+        public string Name { get; set; }
+        public string Header { get; set; }
         public string Footer { get; set; } = "";
 
         public GroupData(string name)
@@ -23,4 +23,6 @@ namespace Addressbook
             Footer = footer;
         }       
     }
+
+    
 }

@@ -16,29 +16,8 @@ namespace Addressbook
 {
 
     [TestFixture]
-    public class TestTest
+    public class CreateGroupTest : TestBase
     {
-        private IWebDriver driver;
-        public IDictionary<string, object> vars { get; private set; }
-        private IJavaScriptExecutor js;
-        public string baseURL;
-
-        [SetUp]
-        public void SetUp()
-        {
-            FirefoxOptions options = new FirefoxOptions();
-            options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
-            // options.UseLegacyImplementation = true;
-            driver = new FirefoxDriver(options);
-            baseURL = "http://localhost:8080/addressbook/";
-
-
-        }
-        [TearDown]
-        protected void TearDown()
-        {
-            driver.Quit();
-        }
         [Test]
         public void GroupTest()
         {
@@ -51,47 +30,6 @@ namespace Addressbook
             CreateGroup(groupData);
             OpenGroupPage();
             LogOut();
-        }
-
-        private void LogOut()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
-
-        private void OpenGroupPage()
-        {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
-        private void CreateGroup(GroupData groupData)
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("new")).Click();
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).SendKeys(groupData.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).SendKeys(groupData.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).SendKeys(groupData.Footer);
-            driver.FindElement(By.Name("submit")).Click();
-        }
-
-        private void Login(AccountData account)
-        {
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Click();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            driver.FindElement(By.CssSelector("input:nth-child(7)")).Click();
-        }
-
-        private void CustomizeWindow()
-        {
-            driver.Manage().Window.Size = new System.Drawing.Size(2575, 1415);
-        }
-
-        private void OpenToHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL);
         }
     }
 }
