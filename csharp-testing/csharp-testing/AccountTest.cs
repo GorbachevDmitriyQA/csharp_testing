@@ -22,14 +22,14 @@ namespace Addressbook
         [Test]
         public void contact()
         {
-            OpenToHomePage();
-            CustomizeWindow();
-            Login(new AccountData("admin", "secret"));
+            navigation.OpenToHomePage();
+            loginHelper.Login(new AccountData("admin", "secret"));
             PersonInfo personInfo = new PersonInfo("Diman");
             personInfo.Address = "Limbo";
             personInfo.LastName = "Dimansky";
             personInfo.Email = "nownownow@mail.ru";
-            CreateNewAccount(personInfo);
+            navigation.GoToNewContactPage();
+            contactHelper.CreateNewAccount(personInfo);
             LogOut();
 
         }

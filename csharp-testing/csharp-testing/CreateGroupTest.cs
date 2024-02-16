@@ -21,14 +21,13 @@ namespace Addressbook
         [Test]
         public void GroupTest()
         {
-            OpenToHomePage();
-            CustomizeWindow();
-            Login(new AccountData("admin", "secret"));
+            navigation.OpenToHomePage();
+            loginHelper.Login(new AccountData("admin", "secret"));
             GroupData groupData = new GroupData("qwe");
             groupData.Footer = "xcv";
             groupData.Header = "xcv";
-            CreateGroup(groupData);
-            OpenGroupPage();
+            groupHelper.CreateGroup(groupData);
+            navigation.OpenGroupPage();
             LogOut();
         }
     }
