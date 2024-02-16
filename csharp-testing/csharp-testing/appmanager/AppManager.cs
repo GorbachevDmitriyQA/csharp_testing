@@ -1,57 +1,74 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading;
+using System.Text;
+using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
-using NUnit.Framework;
-using AccountTest;
-using System.Runtime.CompilerServices;
 
 namespace Addressbook
 {
-    public class TestBase
+    public class AppManager 
     {
         protected IWebDriver driver;
         public IDictionary<string, object> vars { get; private set; }
         //private IJavaScriptExecutor js;
         public string baseURL;
 
-        protected NavigationHelper navigation;
+
+
+        protected NavigationHelper navigator;
         protected LoginHelper loginHelper;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
+        protected LogoutHelper logoutHelper;
 
-        [SetUp]
-        public void SetUp()
+        public void Stop()
+        {
+            driver.Quit();
+        }
+
+        public AppManager()
         {
             FirefoxOptions options = new FirefoxOptions();
             options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
             // options.UseLegacyImplementation = true;
             driver = new FirefoxDriver(options);
             baseURL = "http://localhost:8080/addressbook/";
+            driver.Manage().Window.Size = new System.Drawing.Size(2575, 1415);
             loginHelper = new LoginHelper(driver);
-            navigation = new NavigationHelper(driver, baseURL);
+            navigator = new NavigationHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
             contactHelper = new ContactHelper(driver);
-            driver.Manage().Window.Size = new System.Drawing.Size(2575, 1415);
-
-
+            logoutHelper = new LogoutHelper(driver);
+          
         }
-        [TearDown]
-        protected void TearDown()
+
+        public NavigationHelper Navigator
         {
-            driver.Quit();
+            get { return navigator; }
+        }
+        public LoginHelper LoginHelper
+        {
+            get { return loginHelper;}
+        }
+        public GroupHelper GroupHelper
+        {
+            get { return groupHelper;}
+        }
+        public ContactHelper ContactHelper
+        {
+            get { return contactHelper; }
+        }
+        public LogoutHelper LogoutHelper
+        {
+            get { return logoutHelper; }
         }
 
-        protected void LogOut()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
     }
+
 }

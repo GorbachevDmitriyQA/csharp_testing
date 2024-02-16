@@ -22,15 +22,15 @@ namespace Addressbook
         [Test]
         public void contact()
         {
-            navigation.OpenToHomePage();
-            loginHelper.Login(new AccountData("admin", "secret"));
+            app.Navigator.OpenToHomePage();
+            app.LoginHelper.Login(new AccountData("admin", "secret"));
             PersonInfo personInfo = new PersonInfo("Diman");
             personInfo.Address = "Limbo";
             personInfo.LastName = "Dimansky";
             personInfo.Email = "nownownow@mail.ru";
-            navigation.GoToNewContactPage();
-            contactHelper.CreateNewAccount(personInfo);
-            LogOut();
+            app.Navigator.GoToNewContactPage();
+            app.ContactHelper.CreateNewAccount(personInfo);
+            app.LogoutHelper.LogOut();
 
         }
     }

@@ -12,14 +12,10 @@ using OpenQA.Selenium.Interactions;
 
 namespace Addressbook
 {
-    public class GroupHelper
+    public class GroupHelper : HelperBase
     {
-        private IWebDriver driver;
-        
-        public GroupHelper(IWebDriver driver)
-        {
-            this.driver = driver;
-        }
+        public GroupHelper(IWebDriver driver) : base(driver) { }
+
 
         public void CreateGroup(GroupData groupData)
         {

@@ -13,14 +13,9 @@ using AccountTest;
 
 namespace Addressbook
 {
-    public class ContactHelper
+    public class ContactHelper : HelperBase
     {
-        private IWebDriver driver;
-
-        public ContactHelper(IWebDriver driver)
-        {
-            this.driver = driver;
-        }
+        public ContactHelper(IWebDriver driver) : base(driver) { }
         
         public void CreateNewAccount(PersonInfo person)
         {
