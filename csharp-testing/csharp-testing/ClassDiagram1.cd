@@ -69,15 +69,14 @@
   <Class Name="Addressbook.AppManager" Collapsed="true">
     <Position X="4.5" Y="1.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>gAAAAAAAAAAAAAAAhAAAAASAEAAAAAAAIBDAAAAQwCA=</HashCode>
+      <HashCode>gAAEAAAABAAAAAAAhAAAAASAEAAAAAAAIBCAAAAQgCA=</HashCode>
       <FileName>appmanager\AppManager.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="contactHelper" />
-      <Field Name="groupHelper" />
       <Field Name="loginHelper" />
+      <Field Name="groupHelper" />
+      <Field Name="contactHelper" />
       <Field Name="logoutHelper" />
-      <Field Name="navigation" />
     </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
