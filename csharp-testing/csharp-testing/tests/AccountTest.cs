@@ -20,7 +20,7 @@ namespace Addressbook
     public class ContactTest : TestBase
     { 
         [Test]
-        public void contact()
+        public void Contact()
         {
             PersonInfo personInfo = new PersonInfo("Diman");
             personInfo.Address = "Limbo";

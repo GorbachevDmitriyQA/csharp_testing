@@ -37,5 +37,12 @@ namespace Addressbook
         {
             driver.FindElement(By.LinkText("add new")).Click();
         }
+
+        public void GoToContactPage()
+        {
+            {
+                driver.FindElement(By.LinkText("home")).Click();
+            }
+        }
     }
 }
