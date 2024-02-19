@@ -16,8 +16,9 @@ namespace Addressbook
     {
         private string baseURL;
 
-        public NavigationHelper(IWebDriver driver, string baseURL):base(driver)
+        public NavigationHelper(AppManager manager, string baseURL):base(manager)
         {
+            this.manager = manager;
             this.baseURL = baseURL;
         }
 
@@ -28,7 +29,8 @@ namespace Addressbook
 
         public void OpenGroupPage()
         {
-            driver.FindElement(By.LinkText("group page")).Click();
+            //driver.FindElement(By.LinkText("group page")).Click();
+            driver.FindElement(By.LinkText("groups")).Click();
         }
 
         public void GoToNewContactPage()

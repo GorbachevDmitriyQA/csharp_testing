@@ -21,13 +21,10 @@ namespace Addressbook
         [Test]
         public void GroupTest()
         {
-            app.Navigator.OpenToHomePage();
-            app.LoginHelper.Login(new AccountData("admin", "secret"));
             GroupData groupData = new GroupData("qwe");
             groupData.Footer = "xcv";
             groupData.Header = "xcv";
-            app.GroupHelper.CreateGroup(groupData);
-            app.Navigator.OpenGroupPage();
+            app.GroupHelper.Create(groupData);
             app.LogoutHelper.LogOut();
         }
     }

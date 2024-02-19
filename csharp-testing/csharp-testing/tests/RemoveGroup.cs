@@ -9,17 +9,20 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
+using NUnit.Framework;
 
 namespace Addressbook
 {
-    public class HelperBase
+    [TestFixture]
+    internal class RemoveGroup : TestBase   
     {
-        protected IWebDriver driver;
-        protected AppManager manager;
-
-        public HelperBase(AppManager manager) {
-            this.manager = manager;
-            driver = manager.Driver;
+        [Test]
+        public void RemovalGroup()
+        {
+            app.Navigator.OpenGroupPage();
+            app.GroupHelper.RemoveGroup(1);
+            app.Navigator.OpenGroupPage();
+            app.LogoutHelper.LogOut();
         }
     }
 }

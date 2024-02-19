@@ -15,9 +15,23 @@ namespace Addressbook
 {
     public class ContactHelper : HelperBase
     {
-        public ContactHelper(IWebDriver driver) : base(driver) { }
+        public ContactHelper(AppManager manager) : base(manager) { }
         
-        public void CreateNewAccount(PersonInfo person)
+        public void Create(PersonInfo person)
+        {
+            manager.Navigator.GoToNewContactPage();
+            FillCreateContact(person);
+            SubmitCreateContact();
+            // После создания контакта, страница заново рендериться, чтобы найти LogOut использован слип. 
+            Thread.Sleep(1000);
+        }
+
+        private void SubmitCreateContact()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+        }
+
+        private void FillCreateContact(PersonInfo person)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).SendKeys(person.FirstName);
@@ -27,8 +41,6 @@ namespace Addressbook
             driver.FindElement(By.Name("address")).SendKeys(person.Address);
             driver.FindElement(By.Name("email")).Click();
             driver.FindElement(By.Name("email")).SendKeys(person.Email);
-            driver.FindElement(By.Name("submit")).Click();
-            Thread.Sleep(1000);
         }
     }
 }

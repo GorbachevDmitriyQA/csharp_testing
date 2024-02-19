@@ -14,7 +14,7 @@ namespace Addressbook
 {
     public class LoginHelper : HelperBase 
     {
-        public LoginHelper(IWebDriver driver) : base(driver) { }
+        public LoginHelper(AppManager manager) : base(manager) { }
         public void Login(AccountData account)
         {
             driver.FindElement(By.Name("user")).SendKeys(account.Username);

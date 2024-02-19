@@ -16,7 +16,6 @@ namespace Addressbook
     {
         protected IWebDriver driver;
         public IDictionary<string, object> vars { get; private set; }
-        //private IJavaScriptExecutor js;
         public string baseURL;
 
 
@@ -36,15 +35,14 @@ namespace Addressbook
         {
             FirefoxOptions options = new FirefoxOptions();
             options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
-            // options.UseLegacyImplementation = true;
             driver = new FirefoxDriver(options);
             baseURL = "http://localhost:8080/addressbook/";
             driver.Manage().Window.Size = new System.Drawing.Size(2575, 1415);
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
-            logoutHelper = new LogoutHelper(driver);
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+            logoutHelper = new LogoutHelper(this);
           
         }
 
@@ -67,6 +65,11 @@ namespace Addressbook
         public LogoutHelper LogoutHelper
         {
             get { return logoutHelper; }
+        }
+
+        public IWebDriver Driver
+        {
+            get { return driver; }
         }
 
     }

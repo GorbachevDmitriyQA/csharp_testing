@@ -14,20 +14,78 @@ namespace Addressbook
 {
     public class GroupHelper : HelperBase
     {
-        public GroupHelper(IWebDriver driver) : base(driver) { }
+        public GroupHelper(AppManager manager) : base(manager) { }
 
-
-        public void CreateGroup(GroupData groupData)
+        public void Create(GroupData groupData)
         {
-            driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("new")).Click();
+            manager.Navigator.OpenGroupPage();
+            InitNewGroutCreation();
+            FillGroupForm(groupData);
+            SubmitGroupCreation();
+            manager.Navigator.OpenGroupPage();
+        }
+
+        private void SubmitGroupCreation()
+        {
+            driver.FindElement(By.Name("submit")).Click();
+        }
+
+        private void FillGroupForm(GroupData groupData)
+        {
             driver.FindElement(By.Name("group_name")).Click();
             driver.FindElement(By.Name("group_name")).SendKeys(groupData.Name);
             driver.FindElement(By.Name("group_header")).Click();
             driver.FindElement(By.Name("group_header")).SendKeys(groupData.Header);
             driver.FindElement(By.Name("group_footer")).Click();
             driver.FindElement(By.Name("group_footer")).SendKeys(groupData.Footer);
-            driver.FindElement(By.Name("submit")).Click();
+        }
+
+        private void InitNewGroutCreation()
+        {
+            driver.FindElement(By.Name("new")).Click();
+        }
+
+        public void RemoveGroup(int groupSelect)
+        {
+            SelectedGroup(groupSelect);
+            driver.FindElement(By.Name("delete")).Click();
+        }
+
+        public void SelectedGroup(int groupSelect)
+        {
+            driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + groupSelect + "]")).Click();
+        }
+
+        public void GroupModificated(GroupData groupData)
+        {
+            GoToEditGroup();
+            EditGroupForm(groupData);
+            SubmitUpdateGroup();
+        }
+        public void GoToEditGroup()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+        }
+
+        public void SubmitUpdateGroup()
+        {
+            driver.FindElement(By.Name("update")).Click();
+        }
+
+        public void EditGroupForm(GroupData groupData)
+        {
+            driver.FindElement(By.Name("group_name")).Click();
+            driver.FindElement(By.Name("group_name")).Clear();
+            driver.FindElement(By.Name("group_name")).Click();
+            driver.FindElement(By.Name("group_name")).SendKeys(groupData.Name);
+            driver.FindElement(By.Name("group_header")).Click();
+            driver.FindElement(By.Name("group_header")).Clear();
+            driver.FindElement(By.Name("group_header")).Click();
+            driver.FindElement(By.Name("group_header")).SendKeys(groupData.Header);
+            driver.FindElement(By.Name("group_footer")).Click();
+            driver.FindElement(By.Name("group_footer")).Clear();
+            driver.FindElement(By.Name("group_footer")).Click();
+            driver.FindElement(By.Name("group_footer")).SendKeys(groupData.Footer);
         }
     }
 }
