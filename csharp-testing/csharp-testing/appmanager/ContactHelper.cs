@@ -33,14 +33,28 @@ namespace Addressbook
 
         private void FillCreateContact(PersonInfo person)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).SendKeys(person.FirstName);
-            driver.FindElement(By.Name("lastname")).Click();
-            driver.FindElement(By.Name("lastname")).SendKeys(person.LastName);
-            driver.FindElement(By.Name("address")).Click();
-            driver.FindElement(By.Name("address")).SendKeys(person.Address);
-            driver.FindElement(By.Name("email")).Click();
-            driver.FindElement(By.Name("email")).SendKeys(person.Email);
+            TypeFillCreateContact(By.Name("firstname"), person.FirstName);
+            TypeFillCreateContact(By.Name("lastname"), person.LastName);
+            TypeFillCreateContact(By.Name("address"), person.Address);
+            TypeFillCreateContact(By.Name("email"), person.Email);
+        }
+
+        private void TypeFillCreateContact(By locator, string text)
+        {
+            if (text != null)
+            {
+                driver.FindElement(locator).Click();
+                driver.FindElement(locator).SendKeys(text);
+            }
+        }
+
+        private void TypeFillEditContact(By locator, string text)
+        {
+            if (text != null)
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(text);
+            }
         }
 
         public void DeleteContact(int contactSelect)
@@ -72,12 +86,12 @@ namespace Addressbook
             driver.FindElement(By.CssSelector("tr:nth-child(4) > .center:nth-child(8) img")).Click();
         }
 
-        public void FillEditContact(PersonInfo newPerson)
+        public void FillEditContact(PersonInfo person)
         {
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).Click();
-            driver.FindElement(By.Name("firstname")).SendKeys(newPerson.FirstName);
+            TypeFillEditContact(By.Name("firstname"), person.FirstName);
+            TypeFillEditContact(By.Name("lastname"), person.LastName);
+            TypeFillEditContact(By.Name("address"), person.Address);
+            TypeFillEditContact(By.Name("email"), person.Email);
         }
 
         public void SubmitEditContact()

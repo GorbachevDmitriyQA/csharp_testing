@@ -32,12 +32,18 @@ namespace Addressbook
 
         private void FillGroupForm(GroupData groupData)
         {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).SendKeys(groupData.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).SendKeys(groupData.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).SendKeys(groupData.Footer);
+            TypeFillCreateGroup(By.Name("group_name"), groupData.Name);
+            TypeFillCreateGroup(By.Name("group_header"), groupData.Header);
+            TypeFillCreateGroup(By.Name("group_footer"), groupData.Footer);
+        }
+
+        private void TypeFillCreateGroup(By locator, string text)
+        {
+            if(text != null)
+            {
+                driver.FindElement(locator).Click();
+                driver.FindElement(locator).SendKeys(text);
+            }
         }
 
         private void InitNewGroutCreation()
@@ -74,18 +80,18 @@ namespace Addressbook
 
         public void EditGroupForm(GroupData groupData)
         {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).SendKeys(groupData.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).SendKeys(groupData.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).SendKeys(groupData.Footer);
+            TypeFillEditGroup(By.Name("group_name"), groupData.Name);
+            TypeFillEditGroup(By.Name("group_header"), groupData.Header);
+            TypeFillEditGroup(By.Name("group_footer"), groupData.Footer);
+        }
+
+        private void TypeFillEditGroup(By locator, string text)
+        {
+            if (text != null)
+            {
+                driver.FindElement(locator).Clear();
+                driver.FindElement(locator).SendKeys(text);
+            }
         }
     }
 }

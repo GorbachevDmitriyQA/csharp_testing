@@ -21,9 +21,9 @@ namespace Addressbook
         [Test]
         public void GroupTest()
         {
-            GroupData groupData = new GroupData("qwe");
-            groupData.Footer = "xcv";
-            groupData.Header = "xcv";
+            GroupData groupData = new GroupData("testgroup");
+            groupData.Footer = "testgroup";
+            groupData.Header = "testgroup";
             app.GroupHelper.Create(groupData);
             app.LogoutHelper.LogOut();
         }

@@ -22,8 +22,8 @@ namespace Addressbook
         [Test]
         public void Contact()
         {
-            PersonInfo personInfo = new PersonInfo("Diman");
-            personInfo.Address = "Limbo";
+            PersonInfo personInfo = new PersonInfo("TestName");
+            personInfo.Address = "TestName";
             personInfo.LastName = "Dimansky";
             personInfo.Email = "nownownow@mail.ru";
             app.Navigator.GoToNewContactPage();

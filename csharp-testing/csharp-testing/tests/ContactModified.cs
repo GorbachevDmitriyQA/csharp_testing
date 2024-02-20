@@ -14,6 +14,9 @@ namespace Addressbook
         public void EditContacts()
         {
             PersonInfo newPerson = new PersonInfo("Stiven");
+            newPerson.Email = "email.ru";
+            newPerson.Address = null;
+            newPerson.LastName = null;
             app.Navigator.GoToContactPage();
             app.ContactHelper.EditContact(3, newPerson);
             app.Navigator.GoToContactPage();
