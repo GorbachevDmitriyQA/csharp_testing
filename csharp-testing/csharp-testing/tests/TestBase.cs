@@ -16,14 +16,8 @@ namespace Addressbook
         [SetUp]
         public void SetUp()
         {
-            app = new AppManager();
-            app.Navigator.OpenToHomePage();
-            app.LoginHelper.Login(new AccountData("admin", "secret"));
+            app = TestSuiteFixture.app;
         }
-        [TearDown]
-        protected void TearDown()
-        {
-           app.Stop();
-        }
+
     }
 }

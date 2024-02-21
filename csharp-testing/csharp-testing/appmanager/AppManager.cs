@@ -33,14 +33,14 @@ namespace Addressbook
 
         public AppManager()
         {
-            FirefoxOptions options = new FirefoxOptions();
-            options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
-            driver = new FirefoxDriver(options);
-            driver.Manage().Window.Maximize();
-            //chromeoptions options = new chromeoptions();
-            //options.binarylocation = @"c:\program files (x86)\google\chrome\application\chrome.exe";
-            //options.addargument("start-maximized");
-            //driver = new chromedriver(options);
+            //FirefoxOptions options = new FirefoxOptions();
+            //options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
+            //driver = new FirefoxDriver(options);
+            //driver.Manage().Window.Maximize();
+            ChromeOptions options = new ChromeOptions();
+            options.BinaryLocation = @"c:\program files (x86)\google\chrome\application\chrome.exe";
+            options.AddArgument("start-maximized");
+            driver = new ChromeDriver(options);
             baseURL = "http://localhost:8080/addressbook/";
             //driver.Manage().Window.Size = new System.Drawing.Size(2575, 1415);
             loginHelper = new LoginHelper(this);
