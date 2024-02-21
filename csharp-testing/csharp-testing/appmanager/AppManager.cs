@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
@@ -17,7 +18,7 @@ namespace Addressbook
         protected IWebDriver driver;
         public IDictionary<string, object> vars { get; private set; }
         public string baseURL;
-
+        private static ThreadLocal<AppManager> app = new ThreadLocal<AppManager>();
 
 
         protected NavigationHelper navigator;
@@ -26,12 +27,8 @@ namespace Addressbook
         protected ContactHelper contactHelper;
         protected LogoutHelper logoutHelper;
 
-        public void Stop()
-        {
-            driver.Quit();
-        }
 
-        public AppManager()
+        private AppManager()
         {
             //FirefoxOptions options = new FirefoxOptions();
             //options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
@@ -49,6 +46,11 @@ namespace Addressbook
             contactHelper = new ContactHelper(this);
             logoutHelper = new LogoutHelper(this);
           
+        }
+        //При вызове браузер не закрывается
+        ~AppManager()
+        {
+            driver.Quit();
         }
 
         public NavigationHelper Navigator
@@ -77,6 +79,14 @@ namespace Addressbook
             get { return driver; }
         }
 
+        public static AppManager GetInstance()
+        {
+            if (! app.IsValueCreated)
+            {
+                app.Value = new AppManager();
+            }
+            return app.Value;
+        }
     }
 
 }

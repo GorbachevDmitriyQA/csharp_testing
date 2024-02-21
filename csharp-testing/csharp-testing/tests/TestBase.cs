@@ -9,14 +9,14 @@ using System.Runtime.CompilerServices;
 
 namespace Addressbook
 {
-    public class TestBase
+    public class TestBase : TestSuiteFixture
     {
         protected AppManager app;
 
         [SetUp]
         public void SetUp()
         {
-            app = TestSuiteFixture.app;
+            app = AppManager.GetInstance();
         }
 
     }
