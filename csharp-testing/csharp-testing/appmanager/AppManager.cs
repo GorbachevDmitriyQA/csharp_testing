@@ -49,11 +49,12 @@ namespace Addressbook
           
         }
         //При вызове браузер не закрывается
-        ~AppManager()
+
+        [OneTimeTearDown]
+        public void StopDriver()
         {
             driver.Quit();
         }
-
 
 
         public NavigationHelper Navigator
