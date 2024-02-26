@@ -59,7 +59,7 @@ namespace Addressbook
 
         public void SelectedGroup(int groupSelect)
         {
-            driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + groupSelect + "]")).Click();
+                driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + groupSelect + "]")).Click();
         }
 
         public void GroupModificated(GroupData groupData)
@@ -91,6 +91,22 @@ namespace Addressbook
             {
                 driver.FindElement(locator).Clear();
                 driver.FindElement(locator).SendKeys(text);
+            }
+        }
+
+        /// <summary>
+        /// Проверка на наличие группы для редактирование. В противном случае - создание группы.
+        /// </summary>
+        /// <param name="groupData"></param>
+        public void VerificationGroup(GroupData groupData)
+        {
+            if (IsElemetnPresent(By.ClassName("group")))
+            {
+                return;
+            }
+            else
+            {
+                Create(groupData);
             }
         }
     }

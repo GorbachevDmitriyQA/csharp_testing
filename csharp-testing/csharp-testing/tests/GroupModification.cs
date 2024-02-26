@@ -13,9 +13,10 @@ namespace Addressbook
         public void EditGroup()
         {
             GroupData newGroupData = new GroupData("edit");
-            newGroupData.Footer = null;
-            newGroupData.Header = null;
+            newGroupData.Footer = "edit";
+            newGroupData.Header = "edit";
             app.Navigator.OpenGroupPage();
+            app.GroupHelper.VerificationGroup(newGroupData);
             app.GroupHelper.SelectedGroup(1);
             app.GroupHelper.GroupModificated(newGroupData);
             app.Navigator.OpenGroupPage();
