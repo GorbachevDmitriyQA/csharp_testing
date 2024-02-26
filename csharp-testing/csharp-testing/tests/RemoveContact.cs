@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Addressbook
 {
     [TestFixture]
-    public class RemoveContacts : TestBase
+    public class RemoveContacts : TestBaseAuth
     {
         [Test]
         
@@ -15,7 +15,7 @@ namespace Addressbook
         {
             app.Navigator.GoToContactPage();
             app.ContactHelper.DeleteContact(1);
-            app.LogoutHelper.LogOut();
+            app.AuthUser.Logout();
         }
 
     }

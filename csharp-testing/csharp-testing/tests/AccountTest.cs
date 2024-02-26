@@ -17,7 +17,7 @@ namespace Addressbook
 {
 
     [TestFixture]
-    public class ContactTest : TestBase
+    public class ContactTest : TestBaseAuth
     { 
         [Test]
         public void Contact()
@@ -28,7 +28,7 @@ namespace Addressbook
             personInfo.Email = "nownownow@mail.ru";
             app.Navigator.GoToNewContactPage();
             app.ContactHelper.Create(personInfo);
-            app.LogoutHelper.LogOut();
+            app.AuthUser.Logout();
 
         }
     }

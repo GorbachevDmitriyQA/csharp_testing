@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Addressbook
 {
     [TestFixture]
-    public class ContactModified : TestBase
+    public class ContactModified : TestBaseAuth
     {
         [Test]
         public void EditContacts()
@@ -20,7 +20,7 @@ namespace Addressbook
             app.Navigator.GoToContactPage();
             app.ContactHelper.EditContact(3, newPerson);
             app.Navigator.GoToContactPage();
-            app.LogoutHelper.LogOut();
+            app.AuthUser.Logout();
         }
     }
 }

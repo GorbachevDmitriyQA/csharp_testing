@@ -14,7 +14,7 @@ using NUnit.Framework;
 namespace Addressbook
 {
     [TestFixture]
-    internal class RemoveGroup : TestBase   
+    internal class RemoveGroup : TestBaseAuth
     {
         [Test]
         public void RemovalGroup()
@@ -22,7 +22,7 @@ namespace Addressbook
             app.Navigator.OpenGroupPage();
             app.GroupHelper.RemoveGroup(1);
             app.Navigator.OpenGroupPage();
-            app.LogoutHelper.LogOut();
+            app.AuthUser.Logout();
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Addressbook
 {
 
     [TestFixture]
-    public class CreateGroupTest : TestBase
+    public class CreateGroupTest : TestBaseAuth
     {
         [Test]
         public void GroupTest()
@@ -25,7 +25,7 @@ namespace Addressbook
             groupData.Footer = "testgroup";
             groupData.Header = "testgroup";
             app.GroupHelper.Create(groupData);
-            app.LogoutHelper.LogOut();
+            app.AuthUser.Logout();
         }
     }
 }

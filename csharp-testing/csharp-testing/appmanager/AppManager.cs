@@ -13,6 +13,9 @@ using OpenQA.Selenium.Interactions;
 
 namespace Addressbook
 {
+
+
+
     public class AppManager 
     {
         protected IWebDriver driver;
@@ -22,10 +25,9 @@ namespace Addressbook
 
 
         protected NavigationHelper navigator;
-        protected LoginHelper loginHelper;
+        protected AuthHelper authHelper;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
-        protected LogoutHelper logoutHelper;
 
 
         private AppManager()
@@ -40,11 +42,10 @@ namespace Addressbook
             driver = new ChromeDriver(options);
             baseURL = "http://localhost:8080/addressbook/";
             //driver.Manage().Window.Size = new System.Drawing.Size(2575, 1415);
-            loginHelper = new LoginHelper(this);
+            authHelper = new AuthHelper(this);
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
-            logoutHelper = new LogoutHelper(this);
           
         }
         //При вызове браузер не закрывается
@@ -53,13 +54,15 @@ namespace Addressbook
             driver.Quit();
         }
 
+
+
         public NavigationHelper Navigator
         {
             get { return navigator; }
         }
-        public LoginHelper LoginHelper
+        public AuthHelper AuthUser
         {
-            get { return loginHelper;}
+            get { return authHelper; }
         }
         public GroupHelper GroupHelper
         {
@@ -69,10 +72,6 @@ namespace Addressbook
         {
             get { return contactHelper; }
         }
-        public LogoutHelper LogoutHelper
-        {
-            get { return logoutHelper; }
-        }
 
         public IWebDriver Driver
         {
@@ -81,12 +80,15 @@ namespace Addressbook
 
         public static AppManager GetInstance()
         {
-            if (! app.IsValueCreated)
+            if (!app.IsValueCreated)
             {
-                app.Value = new AppManager();
+                AppManager newInstance = new AppManager();
+                newInstance.Navigator.OpenToHomePage();
+                app.Value = newInstance;
             }
             return app.Value;
         }
+
     }
 
 }
