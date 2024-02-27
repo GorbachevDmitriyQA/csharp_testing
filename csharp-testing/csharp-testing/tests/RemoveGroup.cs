@@ -21,8 +21,12 @@ namespace Addressbook
         {
             app.Navigator.OpenGroupPage();
             app.GroupHelper.VerificationGroup(new GroupData());
-            app.GroupHelper.RemoveGroup(1);
+            List<GroupData> oldGroup = app.GroupHelper.GetGroupList();
+            app.GroupHelper.RemoveGroup(0);
             app.Navigator.OpenGroupPage();
+            List<GroupData> newGroup = app.GroupHelper.GetGroupList();
+            oldGroup.RemoveAt(0);
+            Assert.AreEqual(oldGroup, newGroup);
             app.AuthUser.Logout();
         }
     }

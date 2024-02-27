@@ -6,11 +6,29 @@ using System.Threading.Tasks;
 
 namespace Addressbook
 {
-    public class GroupData
+    public class GroupData : IEquatable<GroupData>
     {
         public string Name { get; set; } = "default";
         public string Header { get; set; } = "default";
         public string Footer { get; set; } = "default";
+
+
+        public bool Equals(GroupData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return false;
+            }
+            if (Object.ReferenceEquals(this, other))
+            { 
+                return true;
+            }
+            return Name == other.Name;
+        }
+        //public override int GetHashCode()
+        //{
+        //    return Name.GetHashCode();
+        //}
 
         public GroupData()
         {

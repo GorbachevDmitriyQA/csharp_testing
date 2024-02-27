@@ -17,9 +17,15 @@ namespace Addressbook
             newGroupData.Header = "edit";
             app.Navigator.OpenGroupPage();
             app.GroupHelper.VerificationGroup(newGroupData);
-            app.GroupHelper.SelectedGroup(1);
-            app.GroupHelper.GroupModificated(newGroupData);
+
+            // Создаем список с имеющимися группами 
+            List<GroupData> oldGroup = app.GroupHelper.GetGroupList();
+            app.GroupHelper.GroupModificated(newGroupData, 0);
             app.Navigator.OpenGroupPage();
+            
+            // Создаем список с имеющимися группами после изменений
+            List<GroupData> newGroup = app.GroupHelper.GetGroupList();
+            Assert.AreNotEqual(newGroup, oldGroup);
         }
 
     }

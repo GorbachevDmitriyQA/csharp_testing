@@ -59,11 +59,12 @@ namespace Addressbook
 
         public void SelectedGroup(int groupSelect)
         {
-                driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + groupSelect + "]")).Click();
+                driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + (groupSelect+1) + "]")).Click();
         }
 
-        public void GroupModificated(GroupData groupData)
+        public void GroupModificated(GroupData groupData, int groupSelect)
         {
+            SelectedGroup(groupSelect);
             GoToEditGroup();
             EditGroupForm(groupData);
             SubmitUpdateGroup();
