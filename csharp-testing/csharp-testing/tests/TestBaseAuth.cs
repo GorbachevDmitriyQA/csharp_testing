@@ -15,6 +15,5 @@ namespace Addressbook
         {
             app.AuthUser.Login(new AccountData("admin", "secret"));
         }
-
     }
 }
