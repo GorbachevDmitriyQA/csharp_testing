@@ -48,13 +48,7 @@ namespace Addressbook
             contactHelper = new ContactHelper(this);
           
         }
-        //При вызове браузер не закрывается
-
-        [OneTimeTearDown]
-        public void StopDriver()
-        {
-            driver.Quit();
-        }
+       
 
 
         public NavigationHelper Navigator
@@ -81,7 +75,7 @@ namespace Addressbook
 
         public static AppManager GetInstance()
         {
-            if (!app.IsValueCreated)
+            if (! app.IsValueCreated)
             {
                 AppManager newInstance = new AppManager();
                 newInstance.Navigator.OpenToHomePage();

@@ -9,6 +9,7 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Addressbook
 {
@@ -17,7 +18,8 @@ namespace Addressbook
         protected IWebDriver driver;
         protected AppManager manager;
 
-        public HelperBase(AppManager manager) {
+        public HelperBase(AppManager manager)
+        {
             this.manager = manager;
             driver = manager.Driver;
         }
@@ -33,7 +35,6 @@ namespace Addressbook
             {
                 return false;
             }
-
         }
     }
 }

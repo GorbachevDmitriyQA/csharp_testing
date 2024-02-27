@@ -47,5 +47,6 @@ namespace Addressbook
                 driver.FindElement(By.LinkText("Logout")).Click();
             }
         }
+
     }
 }

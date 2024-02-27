@@ -29,20 +29,32 @@ namespace Addressbook
 
         public void OpenGroupPage()
         {
-            //driver.FindElement(By.LinkText("group page")).Click();
+            if (driver.Url == "http://localhost:8080/addressbook/group.php" 
+                && IsElemetnPresent(By.CssSelector("input[value='New group']")))
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("groups")).Click();
         }
 
         public void GoToNewContactPage()
         {
+            if (driver.Url == "http://localhost:8080/addressbook/edit.php"
+                && IsElemetnPresent(By.CssSelector("input[value='Enter']")))
+            {
+                return;
+            }
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
         public void GoToContactPage()
         {
+            if (driver.Url == "http://localhost:8080/addressbook/" 
+                && IsElemetnPresent(By.CssSelector("input[value='Send e-Mail']"))) 
             {
-                driver.FindElement(By.LinkText("home")).Click();
+                return;
             }
+            driver.FindElement(By.LinkText("home")).Click();
         }
     }
 }
