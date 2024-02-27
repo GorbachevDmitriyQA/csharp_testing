@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountTest;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +15,7 @@ namespace Addressbook
         public void RemoveContact()
         {
             app.Navigator.GoToContactPage();
+            app.ContactHelper.VerificationContanct(new PersonInfo());
             app.ContactHelper.DeleteContact(1);
             app.AuthUser.Logout();
         }

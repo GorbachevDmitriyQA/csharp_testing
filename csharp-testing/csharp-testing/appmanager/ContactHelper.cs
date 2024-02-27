@@ -83,7 +83,7 @@ namespace Addressbook
 
         public void EditContact()
         {
-            driver.FindElement(By.CssSelector("tr:nth-child(4) > .center:nth-child(8) img")).Click();
+            driver.FindElement(By.CssSelector("tr:nth-child(2) > .center:nth-child(8) img")).Click();
         }
 
         public void FillEditContact(PersonInfo person)
@@ -99,6 +99,16 @@ namespace Addressbook
             driver.FindElement(By.Name("update")).Click();
         }
 
-
+        public void VerificationContanct(PersonInfo person)
+        {
+            if (IsElemetnPresent(By.Name("selected[]")))
+            {
+                return;
+            }
+            else
+            {
+                Create(person);
+            }
+        }
     }
 }

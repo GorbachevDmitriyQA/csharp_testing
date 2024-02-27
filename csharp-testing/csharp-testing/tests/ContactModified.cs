@@ -15,10 +15,11 @@ namespace Addressbook
         {
             PersonInfo newPerson = new PersonInfo("Stiven");
             newPerson.Email = "email.ru";
-            newPerson.Address = null;
-            newPerson.LastName = null;
+            newPerson.Address = "Zoton";
+            newPerson.LastName = "Pupel";
             app.Navigator.GoToContactPage();
-            app.ContactHelper.EditContact(3, newPerson);
+            app.ContactHelper.VerificationContanct(new PersonInfo());
+            app.ContactHelper.EditContact(1, newPerson);
             app.Navigator.GoToContactPage();
             app.AuthUser.Logout();
         }

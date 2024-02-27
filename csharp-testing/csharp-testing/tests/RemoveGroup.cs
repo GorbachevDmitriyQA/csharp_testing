@@ -20,6 +20,7 @@ namespace Addressbook
         public void RemovalGroup()
         {
             app.Navigator.OpenGroupPage();
+            app.GroupHelper.VerificationGroup(new GroupData());
             app.GroupHelper.RemoveGroup(1);
             app.Navigator.OpenGroupPage();
             app.AuthUser.Logout();

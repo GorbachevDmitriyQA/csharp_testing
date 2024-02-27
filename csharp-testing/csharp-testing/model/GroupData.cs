@@ -8,10 +8,14 @@ namespace Addressbook
 {
     public class GroupData
     {
-        public string Name { get; set; } = "";
-        public string Header { get; set; } = "";
-        public string Footer { get; set; } = "";
+        public string Name { get; set; } = "default";
+        public string Header { get; set; } = "default";
+        public string Footer { get; set; } = "default";
 
+        public GroupData()
+        {
+
+        }
         public GroupData(string name)
         {
             Name = name;
