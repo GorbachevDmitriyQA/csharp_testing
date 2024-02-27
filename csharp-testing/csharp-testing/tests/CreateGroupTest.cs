@@ -21,10 +21,16 @@ namespace Addressbook
         [Test]
         public void GroupTest()
         {
-            GroupData groupData = new GroupData("testgroup");
+            GroupData groupData = new GroupData();
+            groupData.Name = "testgroup";
             groupData.Footer = "testgroup";
             groupData.Header = "testgroup";
+
+            List <GroupData> oldGroup = app.GroupHelper.GetGroupList();
+
             app.GroupHelper.Create(groupData);
+            List<GroupData> newGroup = app.GroupHelper.GetGroupList();
+            Assert.AreEqual(oldGroup.Count + 1, newGroup.Count);
             app.AuthUser.Logout();
         }
     }
