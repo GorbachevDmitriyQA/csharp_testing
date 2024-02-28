@@ -23,23 +23,24 @@ namespace AccountTest
             {
                 return true;
             }
-            if (FirstName != other.FirstName && LastName != other.LastName)
+            if (FirstName == other.FirstName && LastName == other.LastName) 
             {
-                return false;
+                return true;
             }
-            return true;
+            return false;
  
         }
+        
 
  
 
 
         public PersonInfo() { }
 
-        public PersonInfo(string firstName, string LasetName)
+        public PersonInfo(string firstName, string lastName)
         {
             FirstName = firstName;
-            LastName = LasetName;
+            LastName = lastName;
         }
 
         public PersonInfo(string firstName)

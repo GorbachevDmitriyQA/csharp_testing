@@ -15,6 +15,7 @@ namespace Addressbook
 {
     public class ContactHelper : HelperBase
     {
+        //private List<PersonInfo> contactCache = null;
         public ContactHelper(AppManager manager) : base(manager) { }
         
         public void Create(PersonInfo person)
@@ -111,16 +112,35 @@ namespace Addressbook
             }
         }
 
+        //public List<PersonInfo> GetContactList()
+        //{
+        //    List<PersonInfo> contacts = new List<PersonInfo>();
+        //    manager.Navigator.GoToContactPage();
+        //    ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr td:nth-child(2)"));
+        //    foreach (IWebElement element in elements)
+        //    {
+        //        contacts.Add(new PersonInfo(element.Text));;
+            
+        //    }
+        //    return contacts;
+        //}
+
         public List<PersonInfo> GetContactList()
         {
-            List<PersonInfo> contacts = new List<PersonInfo>();
-            manager.Navigator.GoToContactPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr td:nth-child(2)"));
-            foreach (IWebElement element in elements)
-            {
-                contacts.Add(new PersonInfo(element.Text));
-            }
+            //if (contactCache == null)
+                //contactCache = new List<PersonInfo>();
+                List<PersonInfo> contacts = new List<PersonInfo>();
+                manager.Navigator.GoToContactPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
+                foreach (IWebElement element in elements)
+                {
+                    var elem = element.FindElements(By.CssSelector("td"));
+                    var firstName = elem[2].Text;
+                    var lastName = elem[1].Text;
+                    contacts.Add(new PersonInfo(firstName, lastName));
+                }
             return contacts;
+            //return new List<PersonInfo>(contactCache);
         }
     }
 }
