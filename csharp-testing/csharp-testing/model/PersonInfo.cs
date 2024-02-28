@@ -28,11 +28,15 @@ namespace AccountTest
                 return true;
             }
             return false;
- 
         }
-        
 
- 
+        public override int GetHashCode()
+        {
+            return ToString().GetHashCode();
+        }
+
+
+
 
 
         public PersonInfo() { }
