@@ -6,14 +6,42 @@ using System.Threading.Tasks;
 
 namespace AccountTest
 {
-    public class PersonInfo
+    public class PersonInfo : IEquatable<PersonInfo>
     {
         public string FirstName { get; set; } = "default";
         public string LastName { get; set; } = "default";
         public string Address { get; set; } = "default";
         public string Email { get; set; } = "default";
 
+        public bool Equals(PersonInfo other)
+        {
+            if (ReferenceEquals(null, other))
+            {
+                return false;
+            }
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            if (FirstName != other.FirstName && LastName != other.LastName)
+            {
+                return false;
+            }
+            return true;
+ 
+        }
+
+ 
+
+
         public PersonInfo() { }
+
+        public PersonInfo(string firstName, string LasetName)
+        {
+            FirstName = firstName;
+            LastName = LasetName;
+        }
+
         public PersonInfo(string firstName)
         {
             FirstName = firstName;

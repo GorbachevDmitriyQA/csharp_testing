@@ -19,8 +19,11 @@ namespace Addressbook
             newPerson.LastName = "Pupel";
             app.Navigator.GoToContactPage();
             app.ContactHelper.VerificationContanct(new PersonInfo());
-            app.ContactHelper.EditContact(1, newPerson);
+            List<PersonInfo> oldContact = app.ContactHelper.GetContactList();
+            app.ContactHelper.EditContact(0, newPerson);
             app.Navigator.GoToContactPage();
+            List<PersonInfo> newContact = app.ContactHelper.GetContactList();
+            Assert.AreNotEqual(oldContact, newContact);
             app.AuthUser.Logout();
         }
     }

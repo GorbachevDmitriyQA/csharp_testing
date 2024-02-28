@@ -67,7 +67,7 @@ namespace Addressbook
 
         public void SelectContact(int contactSelect)
         {
-            driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + contactSelect + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + (contactSelect+1) + "]")).Click();
         }
 
         public void EditContact(int contactSelect, PersonInfo newPerson)
@@ -109,6 +109,18 @@ namespace Addressbook
             {
                 Create(person);
             }
+        }
+
+        public List<PersonInfo> GetContactList()
+        {
+            List<PersonInfo> contacts = new List<PersonInfo>();
+            manager.Navigator.GoToContactPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr td:nth-child(2)"));
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new PersonInfo(element.Text));
+            }
+            return contacts;
         }
     }
 }

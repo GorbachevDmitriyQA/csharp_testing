@@ -16,7 +16,11 @@ namespace Addressbook
         {
             app.Navigator.GoToContactPage();
             app.ContactHelper.VerificationContanct(new PersonInfo());
-            app.ContactHelper.DeleteContact(1);
+            List<PersonInfo> oldContact = app.ContactHelper.GetContactList();
+            app.ContactHelper.DeleteContact(0);
+            List<PersonInfo> newContact = app.ContactHelper.GetContactList();
+            oldContact.RemoveAt(0);
+            Assert.AreEqual(oldContact, newContact);
             app.AuthUser.Logout();
         }
 

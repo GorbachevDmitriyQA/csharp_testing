@@ -26,8 +26,12 @@ namespace Addressbook
             personInfo.Address = "TestName";
             personInfo.LastName = "Dimansky";
             personInfo.Email = "nownownow@mail.ru";
+            app.Navigator.GoToContactPage();
+            List<PersonInfo> oldContact = app.ContactHelper.GetContactList();
             app.Navigator.GoToNewContactPage();
             app.ContactHelper.Create(personInfo);
+            List<PersonInfo> newContact = app.ContactHelper.GetContactList();
+            Assert.AreEqual(oldContact.Count + 1, newContact.Count);
             app.AuthUser.Logout();
 
         }
