@@ -22,7 +22,14 @@ namespace Addressbook
         [SetUp]
         public void SetUpAppManager()
         {
-            app = AppManager.GetInstance();
+            app = new AppManager();
+            app.Navigator.OpenToHomePage();
+        }
+
+        [TearDown]
+        public void StopAppManager()
+        {
+            app.Driver.Quit();
         }
     }
 }

@@ -21,16 +21,13 @@ namespace Addressbook
         protected IWebDriver driver;
         public IDictionary<string, object> vars { get; private set; }
         public string baseURL;
-        private static ThreadLocal<AppManager> app = new ThreadLocal<AppManager>();
-
 
         protected NavigationHelper navigator;
         protected AuthHelper authHelper;
         protected GroupHelper groupHelper;
         protected ContactHelper contactHelper;
 
-
-        private AppManager()
+        public AppManager()
         {
             //FirefoxOptions options = new FirefoxOptions();
             //options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
@@ -71,17 +68,6 @@ namespace Addressbook
         public IWebDriver Driver
         {
             get { return driver; }
-        }
-
-        public static AppManager GetInstance()
-        {
-            if (! app.IsValueCreated)
-            {
-                AppManager newInstance = new AppManager();
-                newInstance.Navigator.OpenToHomePage();
-                app.Value = newInstance;
-            }
-            return app.Value;
         }
 
     }
