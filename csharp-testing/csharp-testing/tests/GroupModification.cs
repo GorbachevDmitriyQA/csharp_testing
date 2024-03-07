@@ -12,6 +12,9 @@ namespace Addressbook
         [Test]
         public void EditGroup()
         {
+            //TO DO Добавить что-нибудь что проверяло бы какое имя у первой группы и если оно = edit, то заменить
+            // Суть проблемы в том, что проверка упадет из-за того что группа была edit и осталась ей же после модификации. 
+            // а мы проверяем что они не равны.
             GroupData newGroupData = new GroupData("edit");
             newGroupData.Footer = "edit";
             newGroupData.Header = "edit";
@@ -22,7 +25,8 @@ namespace Addressbook
             List<GroupData> oldGroup = app.GroupHelper.GetGroupList();
             app.GroupHelper.GroupModificated(newGroupData, 0);
             app.Navigator.OpenGroupPage();
-            
+            Assert.AreEqual(oldGroup.Count, app.GroupHelper.GetConuntGroup());
+
             // Создаем список с имеющимися группами после изменений
             List<GroupData> newGroup = app.GroupHelper.GetGroupList();
             Assert.AreNotEqual(newGroup, oldGroup);

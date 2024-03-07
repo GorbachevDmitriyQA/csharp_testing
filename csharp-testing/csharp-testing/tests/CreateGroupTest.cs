@@ -30,6 +30,10 @@ namespace Addressbook
 
             //Подебажить посмотреть на логику сортировки 
             app.GroupHelper.Create(groupData);
+
+            //Используем быструю проверку по кол-ву групп. Если совпадает с ожидаемым тогда имеет смысл идти дальше
+            Assert.AreEqual(oldGroup.Count + 1, app.GroupHelper.GetConuntGroup());
+
             List<GroupData> newGroup = app.GroupHelper.GetGroupList();
             oldGroup.Add(groupData);
             oldGroup.Sort();

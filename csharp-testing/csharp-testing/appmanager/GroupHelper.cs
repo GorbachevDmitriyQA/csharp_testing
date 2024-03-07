@@ -15,6 +15,7 @@ namespace Addressbook
     public class GroupHelper : HelperBase
     {
         public GroupHelper(AppManager manager) : base(manager) { }
+        
 
         public void Create(GroupData groupData)
         {
@@ -28,6 +29,7 @@ namespace Addressbook
         private void SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            cacheList = null;
         }
 
         private void FillGroupForm(GroupData groupData)
@@ -55,6 +57,7 @@ namespace Addressbook
         {
             SelectedGroup(groupSelect);
             driver.FindElement(By.Name("delete")).Click();
+            cacheList = null;
         }
 
         public void SelectedGroup(int groupSelect)
@@ -77,6 +80,7 @@ namespace Addressbook
         public void SubmitUpdateGroup()
         {
             driver.FindElement(By.Name("update")).Click();
+            cacheList = null;
         }
 
         public void EditGroupForm(GroupData groupData)
@@ -111,16 +115,27 @@ namespace Addressbook
             }
         }
 
+        private List<GroupData> cacheList = null;
+
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-            manager.Navigator.OpenGroupPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
-            { 
-                groups.Add(new GroupData(element.Text));
+            if (cacheList == null)
+            {
+                cacheList = new List<GroupData>();
+                manager.Navigator.OpenGroupPage();
+                ICollection<IWebElement> elementz = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elementz)
+                {
+                    cacheList.Add(new GroupData(element.Text));
+                }
             }
-            return groups;
+            return new List<GroupData>(cacheList);
+
+        }
+
+        public int GetConuntGroup()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count;
         }
     }
 }
