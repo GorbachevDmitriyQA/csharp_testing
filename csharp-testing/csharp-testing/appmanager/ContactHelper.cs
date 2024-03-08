@@ -30,6 +30,7 @@ namespace Addressbook
         private void SubmitCreateContact()
         {
             driver.FindElement(By.Name("submit")).Click();
+            personListCache = null;
         }
 
         private void FillCreateContact(PersonInfo person)
@@ -63,6 +64,7 @@ namespace Addressbook
             SelectContact(contactSelect);
             driver.FindElement(By.CssSelector("input[value=Delete]")).Click();
             driver.SwitchTo().Alert().Accept();
+            personListCache = null;
             Thread.Sleep(1000);
         }
 
@@ -98,6 +100,7 @@ namespace Addressbook
         public void SubmitEditContact()
         {
             driver.FindElement(By.Name("update")).Click();
+            personListCache = null;
         }
 
         public void VerificationContanct(PersonInfo person)
@@ -112,35 +115,24 @@ namespace Addressbook
             }
         }
 
-        //public List<PersonInfo> GetContactList()
-        //{
-        //    List<PersonInfo> contacts = new List<PersonInfo>();
-        //    manager.Navigator.GoToContactPage();
-        //    ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr td:nth-child(2)"));
-        //    foreach (IWebElement element in elements)
-        //    {
-        //        contacts.Add(new PersonInfo(element.Text));;
-            
-        //    }
-        //    return contacts;
-        //}
+        private List<PersonInfo> personListCache = null;
 
         public List<PersonInfo> GetContactList()
         {
-            //if (contactCache == null)
-                //contactCache = new List<PersonInfo>();
-                List<PersonInfo> contacts = new List<PersonInfo>();
+            if (personListCache == null)
+            {
+                personListCache = new List<PersonInfo>();
                 manager.Navigator.GoToContactPage();
-                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("tr[name='entry']"));
-                foreach (IWebElement element in elements)
+                ICollection<IWebElement> elementz = driver.FindElements(By.CssSelector("tr[name='entry']"));
+                foreach (IWebElement element in elementz)
                 {
                     var elem = element.FindElements(By.CssSelector("td"));
                     var firstName = elem[2].Text;
                     var lastName = elem[1].Text;
-                    contacts.Add(new PersonInfo(firstName, lastName));
+                    personListCache.Add(new PersonInfo(firstName, lastName));
                 }
-            return contacts;
-            //return new List<PersonInfo>(contactCache);
+            }
+            return new List<PersonInfo>(personListCache);
         }
     }
 }

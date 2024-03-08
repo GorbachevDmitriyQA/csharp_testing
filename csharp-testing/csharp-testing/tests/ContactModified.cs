@@ -20,6 +20,10 @@ namespace Addressbook
             app.Navigator.GoToContactPage();
             app.ContactHelper.VerificationContanct(new PersonInfo());
             List<PersonInfo> oldContact = app.ContactHelper.GetContactList();
+            if (oldContact[0].FirstName == "Stiven")
+            {
+                newPerson.FirstName = "Chadd";
+            }
             app.ContactHelper.EditContact(0, newPerson);
             app.Navigator.GoToContactPage();
             List<PersonInfo> newContact = app.ContactHelper.GetContactList();
