@@ -126,7 +126,9 @@ namespace Addressbook
                 ICollection<IWebElement> elementz = driver.FindElements(By.CssSelector("span.group"));
                 foreach (IWebElement element in elementz)
                 {
-                    cacheList.Add(new GroupData(element.Text));
+                    cacheList.Add(new GroupData(element.Text) {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
                 }
             }
             return new List<GroupData>(cacheList);

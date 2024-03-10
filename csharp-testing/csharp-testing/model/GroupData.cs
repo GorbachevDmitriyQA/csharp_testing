@@ -11,6 +11,7 @@ namespace Addressbook
         public string Name { get; set; } = "default";
         public string Header { get; set; } = "default";
         public string Footer { get; set; } = "default";
+        public string Id { get; set; }
 
 
         public int CompareTo(GroupData other)

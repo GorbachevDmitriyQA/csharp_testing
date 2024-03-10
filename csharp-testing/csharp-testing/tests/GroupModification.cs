@@ -21,6 +21,7 @@ namespace Addressbook
 
             // Создаем список с имеющимися группами 
             List<GroupData> oldGroup = app.GroupHelper.GetGroupList();
+            GroupData toBeEdit = oldGroup[0];
 
             // Проверяем, что в первая группа не имеет имя = "edit"
             if (oldGroup[0].Name == "edit")
@@ -34,6 +35,14 @@ namespace Addressbook
             // Создаем список с имеющимися группами после изменений
             List<GroupData> newGroup = app.GroupHelper.GetGroupList();
             Assert.AreNotEqual(newGroup, oldGroup);
+
+           foreach (GroupData group in newGroup)
+            {
+                if (group.Id == toBeEdit.Id)
+                {
+                    Assert.AreNotEqual(toBeEdit.Name, group.Name);
+                }
+            }
         }
 
     }

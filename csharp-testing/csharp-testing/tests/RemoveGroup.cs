@@ -22,6 +22,7 @@ namespace Addressbook
             app.Navigator.OpenGroupPage();
             app.GroupHelper.VerificationGroup(new GroupData());
             List<GroupData> oldGroup = app.GroupHelper.GetGroupList();
+            GroupData toBeRemoved = oldGroup[0];
             app.GroupHelper.RemoveGroup(0);
             app.Navigator.OpenGroupPage();
             Assert.AreEqual(oldGroup.Count - 1, app.GroupHelper.GetConuntGroup());
@@ -29,6 +30,12 @@ namespace Addressbook
             List<GroupData> newGroup = app.GroupHelper.GetGroupList();
             oldGroup.RemoveAt(0);
             Assert.AreEqual(oldGroup, newGroup);
+
+            // Проверяем что мы удалили действительно ту группу которую и хотели
+            foreach (GroupData group in newGroup)
+            {
+                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+            }
             app.AuthUser.Logout();
         }
     }
