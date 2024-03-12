@@ -14,8 +14,8 @@ namespace Addressbook
         [Test]
         public void TestContactInFormation()
         {
-            PersonInfo formTable = app.ContactHelper.GetContactInFormationFromTable(0);
-            PersonInfo formEdit = app.ContactHelper.GetContactInFormationFromEditForm(0);
+            PersonInfo formTable = app.ContactHelper.GetContactInFormationFromTable(1);
+            PersonInfo formEdit = app.ContactHelper.GetContactInFormationFromEditForm(1);
 
             Assert.AreEqual(formTable, formEdit);
             Assert.AreEqual(formTable.Address, formEdit.Address);

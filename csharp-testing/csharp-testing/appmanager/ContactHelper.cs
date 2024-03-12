@@ -137,7 +137,7 @@ namespace Addressbook
 
         public PersonInfo GetContactInFormationFromTable(int index)
         {
-            manager.Navigator.OpenToHomePage();
+            manager.Navigator.GoToContactPage();
 
             IList<IWebElement> celss = driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"));
