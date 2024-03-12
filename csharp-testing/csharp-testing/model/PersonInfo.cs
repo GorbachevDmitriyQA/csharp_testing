@@ -11,6 +11,9 @@ namespace AccountTest
         public string FirstName { get; set; } = "default";
         public string LastName { get; set; } = "default";
         public string Address { get; set; } = "default";
+        public string HomePhone { get; set; } = "default";
+        public string WorkPhone { get; set; } = "default";
+        public string MobilePhone { get; set; } = "default";
         public string Email { get; set; } = "default";
 
         public bool Equals(PersonInfo other)
