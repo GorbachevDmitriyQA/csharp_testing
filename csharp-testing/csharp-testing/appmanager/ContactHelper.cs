@@ -9,7 +9,6 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
-using AccountTest;
 using System.Reflection;
 
 namespace Addressbook
@@ -136,16 +135,29 @@ namespace Addressbook
             return new List<PersonInfo>(personListCache);
         }
 
-        public AccountData GetContactInFormationFromTable(int index)
-        {
-            
-
-        }
-
-        public void GetContactInFormationFromEditForm(int x)
+        public PersonInfo GetContactInFormationFromTable(int index)
         {
             manager.Navigator.OpenToHomePage();
-            InitContact();
+
+            IList<IWebElement> celss = driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"));
+
+            string lastName = celss[1].Text;
+            string firstName = celss[2].Text;
+            string address = celss[3].Text;
+            string allPhones = celss[5].Text;
+
+            return new PersonInfo(firstName, lastName)
+            {
+                Address = address,
+                AllPhones = allPhones
+            };
+        }
+
+        public PersonInfo GetContactInFormationFromEditForm(int index)
+        {
+            manager.Navigator.OpenToHomePage();
+            InitContact(index);
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
@@ -153,21 +165,18 @@ namespace Addressbook
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
-            new PersonInfo(firstName, lastName)
+            return new PersonInfo(firstName, lastName)
             {
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
                 WorkPhone = workPhone
             };
-
-
         }
-
         public void InitContact(int index)
         {
-            driver.FindElement(By.Name("entry"))[index]
-                .FindElement(By.TagName("td"))[7]
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[7]
                 .FindElement(By.TagName("a")).Click();
         }
     }

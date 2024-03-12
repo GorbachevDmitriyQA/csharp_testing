@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using NUnit.Framework;
-using AccountTest;
 using System.Runtime.CompilerServices;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;

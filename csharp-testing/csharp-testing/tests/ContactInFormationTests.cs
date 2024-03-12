@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Addressbook;
 using NUnit.Framework;
 
-namespace csharp_testing.tests
+namespace Addressbook
 {
     [TestFixture]
     public class ContactInFormationTests : TestBaseAuth
@@ -14,8 +14,13 @@ namespace csharp_testing.tests
         [Test]
         public void TestContactInFormation()
         {
-            AccountData formTable = app.ContactHelper.GetContactInFormationFromTable(0);
-            AccountData formEdit = app.ContactHelper.GetContactInFormationFromEditForm(0);
+            PersonInfo formTable = app.ContactHelper.GetContactInFormationFromTable(0);
+            PersonInfo formEdit = app.ContactHelper.GetContactInFormationFromEditForm(0);
+
+            Assert.AreEqual(formTable, formEdit);
+            Assert.AreEqual(formTable.Address, formEdit.Address);
+            Assert.AreEqual(formTable.AllPhones, formEdit.AllPhones);
+            
         }
     }
 }

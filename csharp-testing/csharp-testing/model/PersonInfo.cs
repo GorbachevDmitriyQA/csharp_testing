@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AccountTest
+namespace Addressbook
 {
     public class PersonInfo : IEquatable<PersonInfo>
     {
@@ -15,6 +15,38 @@ namespace AccountTest
         public string WorkPhone { get; set; } = "default";
         public string MobilePhone { get; set; } = "default";
         public string Email { get; set; } = "default";
+
+        private string allPhones;
+        public string AllPhones
+        {
+            get
+            {
+                if (allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return ClenUp(HomePhone) + ClenUp(MobilePhone) + ClenUp(WorkPhone).Trim();
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        private string ClenUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            else
+            {
+                return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+            }
+        }
 
         public bool Equals(PersonInfo other)
         {
