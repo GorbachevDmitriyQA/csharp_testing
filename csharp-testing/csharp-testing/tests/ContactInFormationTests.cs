@@ -22,5 +22,14 @@ namespace Addressbook
             Assert.AreEqual(formTable.AllPhones, formEdit.AllPhones);
             
         }
+
+        [Test]
+        public void TestContatcsDetails()
+        {
+            PersonInfo formEdit = app.ContactHelper.GetContactInFormationFromEditForm(0);
+            PersonInfo formDetails = app.ContactHelper.GetContactDetailsForm(0);
+
+            Assert.AreEqual(formDetails.Details, formEdit.Details);
+        }
     }
 }

@@ -10,6 +10,7 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using System.Reflection;
+using System.Globalization;
 
 namespace Addressbook
 {
@@ -156,27 +157,45 @@ namespace Addressbook
 
         public PersonInfo GetContactInFormationFromEditForm(int index)
         {
-            manager.Navigator.OpenToHomePage();
-            InitContact(index);
+            manager.Navigator.GoToContactPage();
+            InitEditContact(index);
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
 
             return new PersonInfo(firstName, lastName)
             {
                 Address = address,
                 HomePhone = homePhone,
                 MobilePhone = mobilePhone,
-                WorkPhone = workPhone
+                WorkPhone = workPhone,
+                Email = email
             };
         }
-        public void InitContact(int index)
+        public void InitEditContact(int index)
         {
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[7]
+                .FindElement(By.TagName("a")).Click();
+        }
+
+        public PersonInfo GetContactDetailsForm(int index)
+        {
+            manager.Navigator.GoToContactPage();
+            initDetailsContatc(index);
+            string text = driver.FindElement(By.Id("content")).Text;
+            return new PersonInfo(text);
+        
+        }
+
+        public void initDetailsContatc(int index)
+        {
+            driver.FindElements(By.Name("entry"))[index]
+                .FindElements(By.TagName("td"))[6]
                 .FindElement(By.TagName("a")).Click();
         }
     }

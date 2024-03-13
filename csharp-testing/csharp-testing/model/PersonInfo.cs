@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,6 +9,9 @@ namespace Addressbook
 {
     public class PersonInfo : IEquatable<PersonInfo>
     {
+        private string allPhones;
+        private string details;
+
         public string FirstName { get; set; } = "default";
         public string LastName { get; set; } = "default";
         public string Address { get; set; } = "default";
@@ -16,7 +20,44 @@ namespace Addressbook
         public string MobilePhone { get; set; } = "default";
         public string Email { get; set; } = "default";
 
-        private string allPhones;
+        public string Details
+        {
+            get
+            {
+                if (details != null)
+                {
+                    return details;
+                }
+                else
+                {
+                    return CleanUpDetails(FirstName)
+                        + CleanUpDetails(LastName)
+                        + CleanUpDetails(Address)
+                        + CleanUpDetails(AllPhones)
+                        + CleanUpDetails(Email);
+                }
+            }
+            set
+            {
+                details = value;
+            }
+        }
+
+        private string CleanUpDetails(string text)
+        {
+            if (text == null || text == "")
+            {
+                return "";
+            }
+            else
+            {
+                return text.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")
+                    .Replace("\r", "").Replace("default", "").Replace("H:", "").Replace("M:", "")
+                    .Replace("W:", "").Replace("\n", "");
+            }
+
+        }
+
         public string AllPhones
         {
             get
@@ -27,7 +68,7 @@ namespace Addressbook
                 }
                 else
                 {
-                    return ClenUp(HomePhone) + ClenUp(MobilePhone) + ClenUp(WorkPhone).Trim();
+                    return CleanUp(HomePhone) + CleanUp(MobilePhone) + CleanUp(WorkPhone).Trim();
                 }
             }
             set
@@ -36,7 +77,7 @@ namespace Addressbook
             }
         }
 
-        private string ClenUp(string phone)
+        private string CleanUp(string phone)
         {
             if (phone == null || phone == "")
             {
@@ -44,7 +85,7 @@ namespace Addressbook
             }
             else
             {
-                return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "") + "\r\n";
+                return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+ "\r\n";
             }
         }
 
@@ -70,10 +111,6 @@ namespace Addressbook
             return ToString().GetHashCode();
         }
 
-
-
-
-
         public PersonInfo() { }
 
         public PersonInfo(string firstName, string lastName)
@@ -93,6 +130,6 @@ namespace Addressbook
             LastName = lastName;
             Address = address;
             Email = email;
-        }   
+        }      
     }
 }
