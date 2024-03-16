@@ -16,7 +16,6 @@ namespace Addressbook
 {
     public class ContactHelper : HelperBase
     {
-        //private List<PersonInfo> contactCache = null;
         public ContactHelper(AppManager manager) : base(manager) { }
         
         public void Create(PersonInfo person)

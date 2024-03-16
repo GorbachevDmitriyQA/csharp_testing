@@ -14,8 +14,6 @@ using OpenQA.Selenium.Interactions;
 namespace Addressbook
 {
 
-
-
     public class AppManager 
     {
         protected IWebDriver driver;
@@ -29,25 +27,21 @@ namespace Addressbook
 
         public AppManager()
         {
-            //FirefoxOptions options = new FirefoxOptions();
-            //options.BrowserExecutableLocation = @"c:\Program Files\Mozilla Firefox\firefox.exe";
-            //driver = new FirefoxDriver(options);
-            //driver.Manage().Window.Maximize();
+
             ChromeOptions options = new ChromeOptions();
             options.BinaryLocation = @"c:\program files (x86)\google\chrome\application\chrome.exe";
             options.AddArgument("start-maximized");
             driver = new ChromeDriver(options);
             baseURL = "http://localhost:8080/addressbook/";
-            //driver.Manage().Window.Size = new System.Drawing.Size(2575, 1415);
             authHelper = new AuthHelper(this);
             navigator = new NavigationHelper(this, baseURL);
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
-          
         }
-       
-
-
+        public IWebDriver Driver
+        {
+            get { return driver; }
+        }
         public NavigationHelper Navigator
         {
             get { return navigator; }
@@ -63,11 +57,6 @@ namespace Addressbook
         public ContactHelper ContactHelper
         {
             get { return contactHelper; }
-        }
-
-        public IWebDriver Driver
-        {
-            get { return driver; }
         }
 
     }
