@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
@@ -18,24 +19,39 @@ namespace Addressbook
     [TestFixture]
     public class CreateGroupTest : TestBaseAuth
     {
-        [Test]
-        public void GroupTest()
+        public static IEnumerable<GroupData> GroupDataFromFile()
         {
-            GroupData groupData = new GroupData();
-            groupData.Name = "testgroup";
-            groupData.Footer = "testgroup";
-            groupData.Header = "testgroup";
+            List<GroupData> groups = new List<GroupData>();
+            string[] lines = File.ReadAllLines(@"groups.csv");
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(",");
+                groups.Add(new GroupData(parts[0])
+                {
+                    Header = parts[1],
+                    Footer = parts[2]
+                });
+
+            }
+            return groups;
+        }
+
+
+        [Test, TestCaseSource(nameof(GroupDataFromFile))]
+
+        public void GroupTest(GroupData data)
+        {
 
             List <GroupData> oldGroup = app.GroupHelper.GetGroupList();
 
             //Подебажить посмотреть на логику сортировки 
-            app.GroupHelper.Create(groupData);
+            app.GroupHelper.Create(data);
 
             //Используем быструю проверку по кол-ву групп. Если совпадает с ожидаемым тогда имеет смысл идти дальше
             Assert.AreEqual(oldGroup.Count + 1, app.GroupHelper.GetConuntGroup());
 
             List<GroupData> newGroup = app.GroupHelper.GetGroupList();
-            oldGroup.Add(groupData);
+            oldGroup.Add(data);
             oldGroup.Sort();
             newGroup.Sort();
             Assert.AreEqual(oldGroup, newGroup);
