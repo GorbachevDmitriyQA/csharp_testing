@@ -13,6 +13,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Addressbook
 {
@@ -43,8 +44,13 @@ namespace Addressbook
             
         }
 
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<GroupData>>(File.ReadAllText(@"groups.json"));
+        }
 
-        [Test, TestCaseSource(nameof(GroupDataFromXmlFile))]
+
+        [Test, TestCaseSource(nameof(GroupDataFromJsonFile))]
 
         public void GroupTest(GroupData data)
         {
