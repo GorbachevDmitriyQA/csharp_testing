@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading;
 using Addressbook;
 using System.IO;
+using System.Xml;
+using System.Xml.Serialization;
 namespace addressbook_test_data_generation
 {
     class Program
@@ -12,15 +14,45 @@ namespace addressbook_test_data_generation
         static void Main(string[] args)
         {
             int count = Convert.ToInt32(args[0]);
-            StreamWriter writter = new StreamWriter(args[1]);
+            StreamWriter writer = new StreamWriter(args[1]);
+            string format = args[2];
+            List <GroupData> groups = new List<GroupData> ();
             for (int i = 0; i < count; i++)
             {
-                writter.WriteLine(String.Format("${0},${1},${2}",
-                      TestBase.GenerateRandomString(10),
-                      TestBase.GenerateRandomString(10),
-                      TestBase.GenerateRandomString(10)));
+                groups.Add(new GroupData(TestBase.GenerateRandomString(10))
+                {
+                    Header = TestBase.GenerateRandomString(10),
+                    Footer = TestBase.GenerateRandomString(10)
+                });
             }
-            writter.Close();
+            if (format == "csv")
+            {
+                WriteGroupsToCsvFile(groups, writer);
+            }
+            else if (format == "xml")
+            {
+                WriteGroupsToXmlFile(groups, writer);
+            }
+            else
+            {
+                Console.WriteLine("undifiend file format" + format);
+            }
+            writer.Close();
+        }
+
+        static void WriteGroupsToCsvFile(List<GroupData> groups, StreamWriter writer)
+        {
+            foreach (GroupData group in groups)
+            {
+                writer.WriteLine(String.Format("${0},${1},${2}",
+                    group.Name, group.Header, group.Footer));
+            }
+        }
+
+        static void WriteGroupsToXmlFile(List<GroupData> groups, StreamWriter writer)
+        {
+            new XmlSerializer(typeof(List<GroupData>)).Serialize(writer, groups);
         }
     }
+
 }

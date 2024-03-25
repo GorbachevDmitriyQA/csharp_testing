@@ -12,6 +12,7 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
+using System.Xml.Serialization;
 
 namespace Addressbook
 {
@@ -19,7 +20,7 @@ namespace Addressbook
     [TestFixture]
     public class CreateGroupTest : TestBaseAuth
     {
-        public static IEnumerable<GroupData> GroupDataFromFile()
+        public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
             string[] lines = File.ReadAllLines(@"groups.csv");
@@ -36,8 +37,14 @@ namespace Addressbook
             return groups;
         }
 
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            return (List<GroupData>) new XmlSerializer(typeof(List<GroupData>)).Deserialize(new StreamReader(@"groups.xml"));
+            
+        }
 
-        [Test, TestCaseSource(nameof(GroupDataFromFile))]
+
+        [Test, TestCaseSource(nameof(GroupDataFromXmlFile))]
 
         public void GroupTest(GroupData data)
         {
