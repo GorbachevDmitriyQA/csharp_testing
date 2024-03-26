@@ -11,24 +11,53 @@ using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
+using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace Addressbook
 {
 
     [TestFixture]
     public class ContactTest : TestBaseAuth
-    { 
-        [Test]
-        public void Contact()
+    {
+        public static IEnumerable<PersonInfo> PersonDataFromCsvFile()
         {
-            PersonInfo personInfo = new PersonInfo("TestName");
-            personInfo.Address = "TestName";
-            personInfo.LastName = "Dimansky";
-            personInfo.Email = "nownownow@mail.ru";
+            List<PersonInfo> persons = new List<PersonInfo>();
+            string[] lines = File.ReadAllLines(@"persons.csv");
+            foreach (string line in lines)
+            {
+                string[] parts = line.Split(",");
+                persons.Add(new PersonInfo()
+                {
+                    LastName = parts[0],
+                    FirstName = parts[1],
+                    Address = parts[2],
+                    HomePhone = parts[3],
+                    WorkPhone = parts[4],
+                    MobilePhone = parts[5],
+                    Email = parts[6]
+                });
+            }
+            return persons;
+        }
+        public static IEnumerable<PersonInfo> PersonDataFromXmlFile()
+        {
+            return (List<PersonInfo>) new XmlSerializer(typeof(List<PersonInfo>)).Deserialize(new StreamReader(@"persons.xml"));
+        }
+
+        public static IEnumerable<PersonInfo> PersonDataFromJsonFile()
+        {
+           return JsonConvert.DeserializeObject<List<PersonInfo>>(File.ReadAllText(@"persons.json"));
+        }
+
+
+        [Test, TestCaseSource(nameof(PersonDataFromJsonFile))]
+        public void Contact(PersonInfo data)
+        {
             app.Navigator.GoToContactPage();
             List<PersonInfo> oldContact = app.ContactHelper.GetContactList();
             app.Navigator.GoToNewContactPage();
-            app.ContactHelper.Create(personInfo);
+            app.ContactHelper.Create(data);
             List<PersonInfo> newContact = app.ContactHelper.GetContactList();
             Assert.AreEqual(oldContact.Count + 1, newContact.Count);
             app.AuthUser.Logout();
