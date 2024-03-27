@@ -14,6 +14,7 @@ using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 using System.Xml.Serialization;
 using Newtonsoft.Json;
+using LinqToDB;
 
 namespace Addressbook
 {
@@ -69,6 +70,16 @@ namespace Addressbook
             newGroup.Sort();
             Assert.AreEqual(oldGroup, newGroup);
             app.AuthUser.Logout();
+        }
+
+        [Test]
+        public void TestDbConnection()
+        {
+            
+            List<GroupData> fromUi = app.GroupHelper.GetGroupList();
+            AddressbookDB db = new AddressbookDB();
+            List<GroupData> fromdb = (from g in db.Groups select g).ToList();
+            db.Close();
         }
     }
 }
