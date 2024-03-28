@@ -11,7 +11,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="linq2db.Mysql" Version="5.4.0" />
+    <PackageReference Include="linq2db" Version="3.0.0" />
+    <PackageReference Include="linq2db.MySql" Version="3.0.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.6.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NUnit" Version="3.13.3" />
@@ -29,6 +30,9 @@
   <ItemGroup>
     <None Update="Adressbook-test-data-generation.deps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="app.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="groups.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

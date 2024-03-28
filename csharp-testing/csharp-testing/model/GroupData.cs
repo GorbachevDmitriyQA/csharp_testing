@@ -61,6 +61,21 @@ namespace Addressbook
             Header = header;
             Footer = footer;
         }       
+
+        /// <summary>
+        /// Запрос из БД вынесен в отдельный метод для удобства
+        /// Запрос вынесен в конструкцию using для удобства завершения работы с процессом.
+        /// Процесс (db.Close()) завершается автоматически
+        /// </summary>
+        /// <returns></returns>
+        public static List<GroupData> GetAllGroups()
+        {
+            
+            using(AddressbookDB db =  new AddressbookDB())
+            {
+                return (from g in db.Groups select g ).ToList();
+            }
+        }
     }
 
     

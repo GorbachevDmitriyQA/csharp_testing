@@ -1,4 +1,5 @@
-﻿using LinqToDB;
+﻿using Addressbook;
+using LinqToDB;
 using LinqToDB.Configuration;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,13 @@ namespace Addressbook
 {
     public class AddressbookDB :LinqToDB.Data.DataConnection
     {
-        //static string connectionString = "Server=localhost;Port=3306;Database=addressbook;Uid=root;Pwd=;charset=utf8;";
-        //static string providerName = "MySql.Data.MySqlClient";
 
-        //DataContext db = new DataContext(connectionString);
-
-
-        public AddressbookDB() : base("Addressbook") { }
+        public AddressbookDB() : base("MySql.Data.MySqlClient",
+            "Server=127.0.0.1;Port=3306;Database=addressbook;Uid=root;Pwd=;charset=utf8;Allow Zero Datetime=true") { }
 
         public ITable<GroupData> Groups { get { return GetTable<GroupData>(); } }
         public ITable<PersonInfo> Contacts { get { return GetTable<PersonInfo>(); } }
     }
 }
+
+

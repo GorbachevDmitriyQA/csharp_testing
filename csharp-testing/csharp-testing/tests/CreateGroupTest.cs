@@ -75,11 +75,9 @@ namespace Addressbook
         [Test]
         public void TestDbConnection()
         {
-            
             List<GroupData> fromUi = app.GroupHelper.GetGroupList();
-            AddressbookDB db = new AddressbookDB();
-            List<GroupData> fromdb = (from g in db.Groups select g).ToList();
-            db.Close();
+            List<GroupData> fromDb = GroupData.GetAllGroups();
+            fromDb.Sort();
         }
     }
 }
