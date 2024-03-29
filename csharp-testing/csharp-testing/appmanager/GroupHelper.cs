@@ -84,6 +84,14 @@ namespace Addressbook
             EditGroupForm(groupData);
             SubmitUpdateGroup();
         }
+
+        public void GroupModificated(GroupData data, GroupData newData)
+        {
+            SelectedGroup(data.Id);
+            GoToEditGroup();
+            EditGroupForm(newData);
+            SubmitUpdateGroup();
+        }
         public void GoToEditGroup()
         {
             driver.FindElement(By.Name("edit")).Click();
@@ -117,6 +125,7 @@ namespace Addressbook
         /// <param name="groupData"></param>
         public void VerificationGroup(GroupData groupData)
         {
+            manager.Navigator.OpenGroupPage();
             if (IsElemetnPresent(By.ClassName("group")))
             {
                 return;
