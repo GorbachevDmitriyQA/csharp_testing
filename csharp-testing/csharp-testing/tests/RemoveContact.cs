@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Addressbook
 {
     [TestFixture]
-    public class RemoveContacts : TestBaseAuth
+    public class RemoveContacts : ContactTestBase
     {
         [Test]
         
@@ -16,12 +16,12 @@ namespace Addressbook
         {
             app.Navigator.GoToContactPage();
             app.ContactHelper.VerificationContanct(new PersonInfo());
-            List<PersonInfo> oldContact = app.ContactHelper.GetContactList();
-            app.ContactHelper.DeleteContact(0);
-            List<PersonInfo> newContact = app.ContactHelper.GetContactList();
+            List<PersonInfo> oldContact = PersonInfo.GetAllContact();
+            PersonInfo toBeRemoved = oldContact[0];
+            app.ContactHelper.DeleteContact(toBeRemoved);
+            List<PersonInfo> newContact = PersonInfo.GetAllContact();
             oldContact.RemoveAt(0);
             Assert.AreEqual(oldContact, newContact);
-            app.AuthUser.Logout();
         }
 
     }

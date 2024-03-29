@@ -1,24 +1,54 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using LinqToDB.Mapping;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Addressbook
 {
-    public class PersonInfo : IEquatable<PersonInfo>
+    [Table(Name = "addressbook")]
+    public class PersonInfo : IEquatable<PersonInfo>, IComparable<PersonInfo>
     {
         private string allPhones;
         private string details;
 
+        [Column(Name = "firstname")]
         public string FirstName { get; set; } = "default";
+
+        [Column(Name = "lastname")]
         public string LastName { get; set; } = "default";
+        
+        [Column(Name = "address")]
         public string Address { get; set; } = "default";
+
+        [Column(Name = "home")]
         public string HomePhone { get; set; } = "default";
+
+        [Column(Name = "work")]
         public string WorkPhone { get; set; } = "default";
+
+        [Column(Name = "mobile")]
         public string MobilePhone { get; set; } = "default";
+
+        [Column(Name = "email")]
         public string Email { get; set; } = "default";
+
+        [Column(Name = "id")]
+        public string Id { get; set;  }
+
+        [Column(Name = "deprecated")]
+        public string Deprecated { get; set; }
+
+        public int CompareTo(PersonInfo other)
+        {
+            if (other == null)
+            { 
+                return 1;
+            }
+            return LastName.CompareTo(other.LastName);
+        }
 
         public string Details
         {
@@ -130,6 +160,17 @@ namespace Addressbook
             LastName = lastName;
             Address = address;
             Email = email;
-        }      
+        }
+        
+        public static List<PersonInfo> GetAllContact() 
+        {
+            using(AddressbookDB db =  new AddressbookDB())
+            {
+                //return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+                return (from c in db.Contacts
+                        where c.Deprecated == "0000-00-00 00:00:00"
+                        select c).ToList();
+            }
+        }
     }
 }

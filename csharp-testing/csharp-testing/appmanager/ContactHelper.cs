@@ -68,9 +68,23 @@ namespace Addressbook
             Thread.Sleep(1000);
         }
 
+        public void DeleteContact(PersonInfo person)
+        {
+            SelectContact(person.Id);
+            driver.FindElement(By.CssSelector("input[value=Delete]")).Click();
+            driver.SwitchTo().Alert().Accept();
+            personListCache = null;
+            Thread.Sleep(1000);
+        }
+
         public void SelectContact(int contactSelect)
         {
-            driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + (contactSelect+1) + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + (contactSelect+1) +"]")).Click();
+        }
+
+        public void SelectContact(string Id)
+        {
+            driver.FindElement(By.XPath("(//input[@name ='selected[]' and @id = "+Id+"])")).Click();
         }
 
         public void EditContact(int contactSelect, PersonInfo newPerson)
@@ -80,8 +94,15 @@ namespace Addressbook
             FillEditContact(newPerson);
             SubmitEditContact();
             Thread.Sleep(1000);
+        }
 
-
+        public void EditContact(PersonInfo oldPerson, PersonInfo editPerson)
+        {
+            SelectContact(oldPerson.Id);
+            GoEditContacts();
+            FillEditContact(editPerson);
+            SubmitEditContact();
+            Thread.Sleep(1000);
         }
 
         public void GoEditContacts()
@@ -95,6 +116,9 @@ namespace Addressbook
             TypeFillEditContact(By.Name("lastname"), person.LastName);
             TypeFillEditContact(By.Name("address"), person.Address);
             TypeFillEditContact(By.Name("email"), person.Email);
+            TypeFillEditContact(By.Name("home"), person.HomePhone);
+            TypeFillEditContact(By.Name("mobile"), person.MobilePhone);
+            TypeFillEditContact(By.Name("work"), person.WorkPhone);
         }
 
         public void SubmitEditContact()

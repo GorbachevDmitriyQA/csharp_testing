@@ -18,7 +18,7 @@ namespace Addressbook
 {
 
     [TestFixture]
-    public class ContactTest : TestBaseAuth
+    public class ContactTest : ContactTestBase
     {
         public static IEnumerable<PersonInfo> PersonDataFromCsvFile()
         {
@@ -51,17 +51,21 @@ namespace Addressbook
         }
 
 
-        [Test, TestCaseSource(nameof(PersonDataFromJsonFile))]
+        [Test, TestCaseSource(nameof(PersonDataFromCsvFile))]
         public void Contact(PersonInfo data)
         {
             app.Navigator.GoToContactPage();
-            List<PersonInfo> oldContact = app.ContactHelper.GetContactList();
-            app.Navigator.GoToNewContactPage();
+            List<PersonInfo> oldContact = PersonInfo.GetAllContact();
             app.ContactHelper.Create(data);
-            List<PersonInfo> newContact = app.ContactHelper.GetContactList();
+            List<PersonInfo> newContact = PersonInfo.GetAllContact();
             Assert.AreEqual(oldContact.Count + 1, newContact.Count);
-            app.AuthUser.Logout();
+        }
 
+        [Test]
+        public void TestConnectionPersonDb()
+        {
+            List<PersonInfo> fromDb = PersonInfo.GetAllContact();
+            fromDb.Sort();
         }
     }
 }
