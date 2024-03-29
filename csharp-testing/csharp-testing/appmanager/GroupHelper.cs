@@ -60,9 +60,21 @@ namespace Addressbook
             cacheList = null;
         }
 
+        public void RemoveGroup(GroupData group)
+        {
+            SelectedGroup(group.Id);
+            driver.FindElement(By.Name("delete")).Click();
+            manager.Navigator.OpenGroupPage();
+            cacheList = null;
+        }
+
         public void SelectedGroup(int groupSelect)
         {
                 driver.FindElement(By.XPath("(//input[@name ='selected[]'])[" + (groupSelect+1) + "]")).Click();
+        }
+        public void SelectedGroup(string id)
+        {
+            driver.FindElement(By.XPath("(//input[@name ='selected[]' and @value = "+id+" ])")).Click();
         }
 
         public void GroupModificated(GroupData groupData, int groupSelect)
@@ -139,5 +151,6 @@ namespace Addressbook
         {
             return driver.FindElements(By.CssSelector("span.group")).Count;
         }
+
     }
 }

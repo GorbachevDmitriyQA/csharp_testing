@@ -18,6 +18,7 @@ namespace Addressbook
     public class TestBase 
     {
         protected AppManager app;
+        public static bool PERFORM_LONG_UI_CHECKS = true;
 
         [SetUp]
         public void SetUpAppManager()

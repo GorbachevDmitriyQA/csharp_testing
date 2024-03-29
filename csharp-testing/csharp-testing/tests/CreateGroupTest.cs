@@ -20,7 +20,7 @@ namespace Addressbook
 {
 
     [TestFixture]
-    public class CreateGroupTest : TestBaseAuth
+    public class CreateGroupTest : GroupTestBase
     {
         public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
@@ -51,12 +51,12 @@ namespace Addressbook
         }
 
 
-        [Test, TestCaseSource(nameof(GroupDataFromJsonFile))]
+        [Test, TestCaseSource(nameof(GroupDataFromCsvFile))]
 
         public void GroupTest(GroupData data)
         {
 
-            List <GroupData> oldGroup = app.GroupHelper.GetGroupList();
+            List <GroupData> oldGroup = GroupData.GetAllGroups();
 
             //Подебажить посмотреть на логику сортировки 
             app.GroupHelper.Create(data);
@@ -64,12 +64,11 @@ namespace Addressbook
             //Используем быструю проверку по кол-ву групп. Если совпадает с ожидаемым тогда имеет смысл идти дальше
             Assert.AreEqual(oldGroup.Count + 1, app.GroupHelper.GetConuntGroup());
 
-            List<GroupData> newGroup = app.GroupHelper.GetGroupList();
+            List<GroupData> newGroup = GroupData.GetAllGroups();
             oldGroup.Add(data);
             oldGroup.Sort();
             newGroup.Sort();
             Assert.AreEqual(oldGroup, newGroup);
-            app.AuthUser.Logout();
         }
 
         [Test]

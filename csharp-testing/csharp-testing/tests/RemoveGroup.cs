@@ -14,20 +14,19 @@ using NUnit.Framework;
 namespace Addressbook
 {
     [TestFixture]
-    internal class RemoveGroup : TestBaseAuth
+    internal class RemoveGroup : GroupTestBase
     {
         [Test]
         public void RemovalGroup()
         {
             app.Navigator.OpenGroupPage();
             app.GroupHelper.VerificationGroup(new GroupData());
-            List<GroupData> oldGroup = app.GroupHelper.GetGroupList();
+            List<GroupData> oldGroup = GroupData.GetAllGroups();
             GroupData toBeRemoved = oldGroup[0];
-            app.GroupHelper.RemoveGroup(0);
-            app.Navigator.OpenGroupPage();
+            app.GroupHelper.RemoveGroup(toBeRemoved);
             Assert.AreEqual(oldGroup.Count - 1, app.GroupHelper.GetConuntGroup());
 
-            List<GroupData> newGroup = app.GroupHelper.GetGroupList();
+            List<GroupData> newGroup = GroupData.GetAllGroups();
             oldGroup.RemoveAt(0);
             Assert.AreEqual(oldGroup, newGroup);
 

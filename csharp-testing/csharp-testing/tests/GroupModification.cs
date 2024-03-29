@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Addressbook
 {
     [TestFixture]
-    public class GroupModification : TestBaseAuth
+    public class GroupModification : GroupTestBase
     {
         [Test]
         public void EditGroup()
