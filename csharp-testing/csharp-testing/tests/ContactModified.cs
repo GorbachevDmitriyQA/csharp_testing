@@ -39,7 +39,7 @@ namespace Addressbook
             app.ContactHelper.VerificationContanct(new PersonInfo());
             List<PersonInfo> oldContact = PersonInfo.GetAllContact();
             PersonInfo toBeEdit = oldContact[0];
-            if (toBeEdit.FirstName == "Nunivov")
+            if (toBeEdit.FirstName == "Ksenya")
             {
                 person.FirstName = GenerateRandomString(10);
                 person.LastName = GenerateRandomString(10);

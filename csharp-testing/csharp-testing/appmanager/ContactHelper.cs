@@ -39,6 +39,9 @@ namespace Addressbook
             TypeFillCreateContact(By.Name("lastname"), person.LastName);
             TypeFillCreateContact(By.Name("address"), person.Address);
             TypeFillCreateContact(By.Name("email"), person.Email);
+            TypeFillEditContact(By.Name("home"), person.HomePhone);
+            TypeFillEditContact(By.Name("mobile"), person.MobilePhone);
+            TypeFillEditContact(By.Name("work"), person.WorkPhone);
         }
 
         private void TypeFillCreateContact(By locator, string text)
@@ -153,7 +156,15 @@ namespace Addressbook
                     var elem = element.FindElements(By.CssSelector("td"));
                     var firstName = elem[2].Text;
                     var lastName = elem[1].Text;
-                    personListCache.Add(new PersonInfo(firstName, lastName));
+                    var address = elem[3].Text;
+                    var email = elem[4].Text;
+                    var allPhones = elem[5].Text;
+                    personListCache.Add(new PersonInfo(firstName, lastName)
+                    {
+                        Address = address,
+                        Email = email,
+                        AllPhones = allPhones
+                    });
                 }
             }
             return new List<PersonInfo>(personListCache);

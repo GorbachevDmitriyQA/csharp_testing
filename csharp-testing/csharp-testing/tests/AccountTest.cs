@@ -67,5 +67,11 @@ namespace Addressbook
             List<PersonInfo> fromDb = PersonInfo.GetAllContact();
             fromDb.Sort();
         }
+
+        [Test]
+        public void TestNewGetListContacts()
+        {
+            List <PersonInfo> fromUi = app.ContactHelper.GetContactList();
+        }
     }
 }

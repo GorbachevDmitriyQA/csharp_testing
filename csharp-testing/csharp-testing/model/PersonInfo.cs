@@ -129,7 +129,9 @@ namespace Addressbook
             {
                 return true;
             }
-            if (FirstName == other.FirstName && LastName == other.LastName) 
+            if (FirstName == other.FirstName && LastName == other.LastName
+                && Address == other.Address && AllPhones == other.AllPhones
+                && Email == other.Email) 
             {
                 return true;
             }
