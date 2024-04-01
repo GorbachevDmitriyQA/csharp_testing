@@ -35,7 +35,7 @@ namespace Addressbook
                 return false;
             }
             if (Object.ReferenceEquals(this, other))
-            { 
+            {
                 return true;
             }
             return Name == other.Name;
@@ -60,7 +60,7 @@ namespace Addressbook
             Name = name;
             Header = header;
             Footer = footer;
-        }       
+        }
 
         /// <summary>
         /// Запрос из БД вынесен в отдельный метод для удобства
@@ -70,10 +70,10 @@ namespace Addressbook
         /// <returns></returns>
         public static List<GroupData> GetAllGroups()
         {
-            
-            using(AddressbookDB db =  new AddressbookDB())
+
+            using (AddressbookDB db = new AddressbookDB())
             {
-                return (from g in db.Groups select g ).ToList();
+                return (from g in db.Groups select g).ToList();
             }
         }
 
@@ -96,7 +96,6 @@ namespace Addressbook
                         select c).Distinct().ToList();
             }
         }
-    }
 
-    
+    }
 }

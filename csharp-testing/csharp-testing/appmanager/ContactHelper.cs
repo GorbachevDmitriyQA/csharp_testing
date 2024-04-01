@@ -260,5 +260,27 @@ namespace Addressbook
         {
             new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
+
+        public void RemoveContactFromGroup(PersonInfo contacts, GroupData group)
+        {
+            manager.Navigator.GoToContactPage();
+            SelectGroupFilter(group.Name);
+            SelectContact(contacts.Id);
+            CommitRemoveContactGroup();
+            manager.Navigator.GoToContactPage();
+            ClearGroupFilter();
+        }
+
+        public void CommitRemoveContactGroup()
+        {
+            driver.FindElement(By.Name("remove")).Click();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).
+                Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void SelectGroupFilter(string groupName)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(groupName);
+        }
     }
 }

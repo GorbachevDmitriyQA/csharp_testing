@@ -9,7 +9,7 @@ using LinqToDB;
 
 namespace Addressbook
 {
-    public class ContactAddToGroupTests :TestBaseAuth
+    public class ContactAddToGroupTests : ContactTestBase
     {
         [Test]
         public void AddContactToGroup()
