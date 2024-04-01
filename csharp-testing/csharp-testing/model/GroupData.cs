@@ -76,6 +76,26 @@ namespace Addressbook
                 return (from g in db.Groups select g ).ToList();
             }
         }
+
+        public List<PersonInfo> GetContactInGroup()
+        {
+            using (AddressbookDB db = new AddressbookDB())
+            {
+                // Альтеранативный вариант запроса
+
+                //return (from c in db.Contacts
+                //        from grc in db.GCR.Where(p => p.GroupId == Id
+                //        && p.ContactId == c.Id)
+                //        select c).Distinct().ToList();
+
+                return (from c in db.Contacts
+                        where c.Deprecated == "0000-00-00 00:00:00"
+                        from gcr in db.GCR
+                        where gcr.GroupId == Id
+                        && gcr.ContactId == c.Id
+                        select c).Distinct().ToList();
+            }
+        }
     }
 
     

@@ -74,9 +74,10 @@ namespace Addressbook
         [Test]
         public void TestDbConnection()
         {
-            List<GroupData> fromUi = app.GroupHelper.GetGroupList();
-            List<GroupData> fromDb = GroupData.GetAllGroups();
-            fromDb.Sort();
+            foreach (PersonInfo person in GroupData.GetAllGroups()[1].GetContactInGroup())
+            {
+                System.Console.Out.WriteLine(person);
+            };
         }
     }
 }

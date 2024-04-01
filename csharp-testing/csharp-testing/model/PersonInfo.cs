@@ -35,7 +35,7 @@ namespace Addressbook
         [Column(Name = "email")]
         public string Email { get; set; } = "default";
 
-        [Column(Name = "id")]
+        [Column(Name = "id"), PrimaryKey]
         public string Id { get; set;  }
 
         [Column(Name = "deprecated")]
