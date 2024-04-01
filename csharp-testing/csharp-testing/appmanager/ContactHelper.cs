@@ -11,6 +11,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using System.Reflection;
 using System.Globalization;
+using NUnit.Framework;
 
 namespace Addressbook
 {
@@ -231,6 +232,33 @@ namespace Addressbook
             driver.FindElements(By.Name("entry"))[index]
                 .FindElements(By.TagName("td"))[6]
                 .FindElement(By.TagName("a")).Click();
+        }
+
+        public void AddContactToGroup(PersonInfo contact, GroupData groupAdd)
+        {
+            manager.Navigator.GoToContactPage();
+            ClearGroupFilter();
+            SelectContact(contact.Id);
+            SelectGroupToAdd(groupAdd.Name);
+            CommitAddContactToGroup();
+
+        }
+
+        public void CommitAddContactToGroup()
+        {
+            driver.FindElement(By.Name("add")).Click();
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10)).
+                Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        public void SelectGroupToAdd(string groupName)
+        {
+            new SelectElement(driver.FindElement(By.Name("to_group"))).SelectByText(groupName);
+        }
+
+        public void ClearGroupFilter()
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText("[all]");
         }
     }
 }
