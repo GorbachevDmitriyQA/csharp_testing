@@ -21,11 +21,14 @@ namespace Addressbook
             List <PersonInfo> oldListContanct = groupRemove.GetContactInGroup();
             PersonInfo contactsRemove = oldListContanct[0];
 
-            //TO DO
-            //1. Заняться оптимизацией и улучшайзингом/добавлением проверок в методе или тесте
+
             app.ContactHelper.RemoveContactFromGroup(contactsRemove, groupRemove);
 
             List<PersonInfo> newListContanct = groupRemove.GetContactInGroup();
+            oldListContanct.Remove(contactsRemove);
+            oldListContanct.Sort();
+            newListContanct.Sort();
+            //Что делать если null в newListContact
             foreach (PersonInfo person in newListContanct)
             {
                 if (contactsRemove.Id == person.Id)
@@ -33,8 +36,7 @@ namespace Addressbook
                     throw new Exception("Removed contact from group has been failed");
                 }
             }
-            Assert.AreNotEqual(oldListContanct, newListContanct);
-
+            Assert.AreEqual(oldListContanct, newListContanct);
         }
 
     }

@@ -14,8 +14,6 @@ namespace Addressbook
         {
             if (PERFORM_LONG_UI_CHECKS)
             {
-                // TO DO Допилить метод GetContactList - требуется доабвить емаил и 
-                // иначе сравнение списков будет падать за недостатком данных
                 List<PersonInfo> fromUi = app.ContactHelper.GetContactList();
                 List<PersonInfo> fromDb = PersonInfo.GetAllContact();
                 fromUi.Sort();
