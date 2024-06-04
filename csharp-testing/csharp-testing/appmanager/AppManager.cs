@@ -49,6 +49,7 @@ namespace Addressbook
         public AuthHelper AuthUser
         {
             get { return authHelper; }
+            //Comment
         }
         public GroupHelper GroupHelper
         {
