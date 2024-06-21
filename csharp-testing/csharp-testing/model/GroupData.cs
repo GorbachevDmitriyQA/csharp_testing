@@ -18,7 +18,11 @@ namespace Addressbook
         public string Footer { get; set; } = "default";
         [Column(Name = "group_id"), PrimaryKey, Identity]
         public string Id { get; set; }
-
+        /// <summary>
+        /// qwewqe
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
 
         public int CompareTo(GroupData other)
         {
