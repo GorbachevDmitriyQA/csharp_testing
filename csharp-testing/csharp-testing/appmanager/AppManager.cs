@@ -13,7 +13,9 @@ using OpenQA.Selenium.Interactions;
 
 namespace Addressbook
 {
-
+    /// <summary>
+    /// qweqweqwe
+    /// </summary>
     public class AppManager 
     {
         protected IWebDriver driver;
