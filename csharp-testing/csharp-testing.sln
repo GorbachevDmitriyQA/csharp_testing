@@ -10,7 +10,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adressbook-test-data-genera
 		{E2836CC9-880A-4683-8EFA-250CC9B804EC} = {E2836CC9-880A-4683-8EFA-250CC9B804EC}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary1", "..\..\ClassLibrary1\ClassLibrary1\ClassLibrary1\ClassLibrary1.csproj", "{C4397A36-886F-4D2E-B715-8D59ADD3B53D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClassLibrary1", "..\ClassLibrary1\ClassLibrary1\ClassLibrary1.csproj", "{F7397391-561A-4393-A403-9B95EAD38466}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -26,10 +26,10 @@ Global
 		{BE2ED8B3-3974-406E-887D-7390B3273895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE2ED8B3-3974-406E-887D-7390B3273895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE2ED8B3-3974-406E-887D-7390B3273895}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C4397A36-886F-4D2E-B715-8D59ADD3B53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C4397A36-886F-4D2E-B715-8D59ADD3B53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C4397A36-886F-4D2E-B715-8D59ADD3B53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C4397A36-886F-4D2E-B715-8D59ADD3B53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7397391-561A-4393-A403-9B95EAD38466}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7397391-561A-4393-A403-9B95EAD38466}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7397391-561A-4393-A403-9B95EAD38466}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7397391-561A-4393-A403-9B95EAD38466}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
