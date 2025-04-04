@@ -13,7 +13,9 @@ using OpenQA.Selenium.Interactions;
 
 namespace Addressbook
 {
-
+    /// <summary>
+    /// qweqweqwe
+    /// </summary>
     public class AppManager 
     {
         protected IWebDriver driver;
@@ -49,6 +51,7 @@ namespace Addressbook
         public AuthHelper AuthUser
         {
             get { return authHelper; }
+            //Comment
         }
         public GroupHelper GroupHelper
         {
