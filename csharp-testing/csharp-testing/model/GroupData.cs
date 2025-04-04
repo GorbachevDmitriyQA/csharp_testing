@@ -44,6 +44,7 @@ namespace Addressbook
             }
             return Name == other.Name;
             Console.WriteLine("qwe");
+            Console.WriteLine("qwe");
         }
 
 
