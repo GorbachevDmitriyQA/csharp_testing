@@ -28,6 +28,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\ClassLibrary1\ClassLibrary1\ClassLibrary1\ClassLibrary1.csproj" />
+    <ProjectReference Include="..\..\ClassLibrary1\ClassLibrary1\ClassLibrary1.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Adressbook-test-data-generation.deps.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
