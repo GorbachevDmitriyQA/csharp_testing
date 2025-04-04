@@ -43,7 +43,7 @@ namespace Addressbook
                 return true;
             }
             return Name == other.Name;
-            Console.WriteLine("bbbbbbbb");
+            Console.WriteLine("aaaaaCCCCCC");
         }
 
 
