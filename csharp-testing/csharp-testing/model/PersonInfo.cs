@@ -5,6 +5,7 @@ using LinqToDB.Mapping;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Security.Policy;
 
 namespace Addressbook
 {
@@ -140,7 +141,7 @@ namespace Addressbook
 
         public override int GetHashCode()
         {
-            return FirstName.GetHashCode();
+            return GetHashCode();
         }
 
         public PersonInfo() { }
