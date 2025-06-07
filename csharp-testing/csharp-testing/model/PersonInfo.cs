@@ -141,7 +141,7 @@ namespace Addressbook
 
         public override int GetHashCode()
         {
-            return FirstName.GetHashCode() ^ LastName.GetHashCode();
+            return FirstName.GetHashCode();
         }
 
         public PersonInfo() { }
