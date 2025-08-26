@@ -65,7 +65,8 @@ namespace Addressbook
         public void TestConnectionPersonDb()
         {
             List<PersonInfo> fromDb = PersonInfo.GetAllContact();
-            fromDb.Sort();
+            //fromDb.Sort();
+
         }
 
         [Test]
